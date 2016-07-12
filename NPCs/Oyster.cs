@@ -15,10 +15,10 @@ namespace Auralite.NPCs
             npc.width = 42;
             npc.height = 36;
             npc.damage = 0;
-            npc.defense = 9;
+            npc.defense = 0;
             npc.noGravity = false;
             npc.noTileCollide = false;
-            npc.lifeMax = 150;
+            npc.lifeMax = 20;
             npc.soundHit = 6;
             npc.soundKilled = 6;
             npc.value = 300f;
@@ -44,7 +44,7 @@ namespace Auralite.NPCs
             int x = spawnInfo.spawnTileX;
             int y = spawnInfo.spawnTileY;
             int tile = (int)Main.tile[x, y].type;
-            return spawnInfo.water && (x < 250 || x > Main.maxTilesX - 250) ? 0.7f : 0f;
+            return spawnInfo.water && (x < 250 || x > Main.maxTilesX - 250) ? 1f : 0f;
         }
         public override void AI()
         {
