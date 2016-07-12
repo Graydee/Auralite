@@ -1,0 +1,3 @@
+author = Graydee &amp; Dev team
+version = 0.1
+displayName = Auralite
