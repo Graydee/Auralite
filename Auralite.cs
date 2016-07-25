@@ -10,8 +10,9 @@ namespace Auralite
 			{
 				Autoload = true,
 				AutoloadGores = true,
-				AutoloadSounds = true
-			};
+				AutoloadSounds = true,
+                AutoloadBackgrounds = true
+            };
 		}
 	}
 }

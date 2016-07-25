@@ -38,8 +38,8 @@ namespace Auralite.Items.Weapons
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(323, 1);
-            recipe.AddIngredient(ItemID.GoldBar, 10);
+            recipe.AddIngredient(ItemID.AntlionMandible, 1);
+            recipe.AddIngredient(ItemID.GoldBar, 1);
             recipe.AddTile(16);
             recipe.SetResult(this, 30);
             recipe.AddRecipe();
