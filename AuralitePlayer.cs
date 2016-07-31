@@ -13,9 +13,11 @@ namespace Auralite
 	public class AuralitePlayer : ModPlayer
 	{
         public bool ZoneMystic = false;
+		public bool ZoneSlime = false;
         public override void UpdateBiomes()
 		{
-			ZoneMystic = (MysticCaves.MysticTiles > 400);
+			ZoneMystic = (MysticCaves.MysticTiles > 500);
+			ZoneSlime = (SlimeNest.SlimeTiles > 500);
 		}
     }
 }
