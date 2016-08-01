@@ -36,6 +36,9 @@ namespace Auralite
 			if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneSlime && !Main.gameMenu && playMusic) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/SlimeDen");
 			}
+					if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneMystic && !Main.gameMenu && playMusic) {
+					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/MysticCaves");
+			}
 		}
 	}
 }

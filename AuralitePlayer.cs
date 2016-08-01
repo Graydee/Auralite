@@ -14,9 +14,11 @@ namespace Auralite
 	{
         public bool ZoneMystic = false;
 		public bool ZoneSlime = false;
+		public bool ZoneSpring = false;
         public override void UpdateBiomes()
 		{
 			ZoneMystic = (MysticCaves.MysticTiles > 500);
+			ZoneSpring = (Springs.SpringTiles > 300);
 			ZoneSlime = (SlimeNest.SlimeTiles > 500);
 		}
     }
