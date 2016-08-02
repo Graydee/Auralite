@@ -13,8 +13,9 @@ namespace Auralite.Tiles
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
             soundType = 27;
+			drop = mod.ItemType("MysticStone");
             soundStyle = 2;
-			AddMapEntry(new Color(200, 200, 200));
+			AddMapEntry(new Color(67, 121, 168));
 		}
 
 		public override void NumDust(int i, int j, bool fail, ref int num)

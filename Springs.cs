@@ -26,10 +26,10 @@ namespace Auralite
 			{
                 progress.Message = "Making the underground tranquil";
                
-                for (int i = 0; i < (int)Main.maxTilesX / 250; i++)
+                for (int i = 0; i < (int)Main.maxTilesX / 150; i++)
 				{
 					int Xvalue = WorldGen.genRand.Next(50, Main.maxTilesX - 700);
-					int Yvalue = WorldGen.genRand.Next((int)WorldGen.rockLayer, Main.maxTilesY - 500);
+					int Yvalue = WorldGen.genRand.Next((int)WorldGen.rockLayer - 50, Main.maxTilesY - 700);
 					int XvalueHigh = Xvalue + 400;
 					int YvalueHigh = Yvalue + 400;
 					int XvalueMid = Xvalue + 200;
@@ -56,6 +56,12 @@ namespace Auralite
                                                                                                                                                                                      }
                                                                                                                                                                                  }
                                                                                                                                                                              }
+					int PlacementY = YvalueMid + WorldGen.genRand.Next(-50, 50);
+                        int PlacementX = XvalueMid + WorldGen.genRand.Next(-50, 50);
+                        if (Main.tile[PlacementX, PlacementY - 1].type == mod.TileType("SpringGrass") || Main.tile[PlacementX, PlacementY - 2].type == mod.TileType("SpringGrass"))
+                        {
+                            WorldGen.PlaceObject(PlacementX, PlacementY, 4);
+                        }
 					}
 					}
 

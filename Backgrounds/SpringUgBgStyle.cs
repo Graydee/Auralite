@@ -22,22 +22,22 @@ namespace Auralite.Backgrounds
 		public override void FillTextureArray(int[] textureSlots)
 		{
 			textureSlots[0] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG0");
-			if (++SurfaceFrameCounter > 12)
+			if (++SurfaceFrameCounter > 0)
 			{
 				SurfaceFrame = (SurfaceFrame + 1) % 3;
 				SurfaceFrameCounter = 0;
 			}
 			if (SurfaceFrame == 0)
 			{
-			textureSlots[1] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG1A");
+			textureSlots[3] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG1A");
 			}
 			if (SurfaceFrame == 1)
 			{
-			textureSlots[1] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG1B");
+			textureSlots[3] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG1B");
 			}
 			if (SurfaceFrame == 2)
 			{
-			textureSlots[1] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG1C");
+			textureSlots[3] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG1C");
 			}
 			textureSlots[2] = mod.GetBackgroundSlot("Backgrounds/SpringBiomeUG2");
 			

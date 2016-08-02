@@ -12,7 +12,7 @@ namespace Auralite.Tiles
 			Main.tileMergeDirt[Type] = true;
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
-			AddMapEntry(new Color(200, 200, 200));
+			AddMapEntry(new Color(162, 222, 184));
 		}
 
 		public override void NumDust(int i, int j, bool fail, ref int num)

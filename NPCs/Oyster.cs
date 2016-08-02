@@ -44,7 +44,7 @@ namespace Auralite.NPCs
             int x = spawnInfo.spawnTileX;
             int y = spawnInfo.spawnTileY;
             int tile = (int)Main.tile[x, y].type;
-            return spawnInfo.water && (x < 250 || x > Main.maxTilesX - 250) ? 1f : 0f;
+            return spawnInfo.water && (x < 250 || x > Main.maxTilesX - 250) ? 10f : 0f;
         }
         public override void AI()
         {

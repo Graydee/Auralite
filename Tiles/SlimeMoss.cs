@@ -14,7 +14,8 @@ namespace Auralite.Tiles
 			Main.tileLighted[Type] = false;
             soundType = 27;
             soundStyle = 2;
-			AddMapEntry(new Color(200, 200, 200));
+			drop = mod.ItemType("SlimeMoss");
+			AddMapEntry(new Color(142, 217, 63));
 		}
 
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -30,7 +31,7 @@ namespace Auralite.Tiles
 		}
         public override bool KillSound(int i, int j)
         {
-            Main.PlaySound(2, i * 16, j * 16, 27);
+            Main.PlaySound(4, i * 16, j * 16, 1);
             return false;
         }
 		public override void RandomUpdate(int i, int j)
