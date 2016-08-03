@@ -7,7 +7,7 @@ using Terraria.World.Generation;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.Generation;
 
-namespace Auralite
+namespace Auralite.WorldContent
 {
 	public class SlimeNest : ModWorld
 	{
