@@ -11,7 +11,7 @@ namespace Auralite.Items.Weapons
         public override void SetDefaults()
         {
             item.name = "Vortex lightning blaster";
-            item.damage = 61; //The damage
+            item.damage = 75; //The damage
             item.ranged = true; //Whether or not it is a magic weapon
             item.width = 54; //Item width
             item.height = 54; //Item height

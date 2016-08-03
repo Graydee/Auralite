@@ -29,7 +29,7 @@ namespace Auralite.WorldContent
                 for (int i = 0; i < (int)Main.maxTilesX / 150; i++)
 				{
 					int Xvalue = WorldGen.genRand.Next(50, Main.maxTilesX - 700);
-					int Yvalue = WorldGen.genRand.Next((int)WorldGen.rockLayer - 50, Main.maxTilesY - 700);
+					int Yvalue = WorldGen.genRand.Next((int)WorldGen.rockLayer - 125, Main.maxTilesY - 700);
 					int XvalueHigh = Xvalue + 400;
 					int YvalueHigh = Yvalue + 400;
 					int XvalueMid = Xvalue + 200;
