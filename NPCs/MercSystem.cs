@@ -20,7 +20,7 @@ namespace Auralite.NPCs
 			//Increase NPC damage by 20% while hired
 			AuraNPCInfo info = npc.GetModInfo<AuraNPCInfo>(mod);
 			if(info.hired) {
-				damage = (int)(damage * 0.2);
+				damage = (int)(damage * 1.2);
 			}
 		}
 
