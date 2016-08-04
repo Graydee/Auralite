@@ -16,6 +16,9 @@ namespace Auralite
         public bool ZoneMystic = false;
 		public bool ZoneSlime = false;
 		public bool ZoneSpring = false;
+		public int maxPartySize = 4;
+		public int partySize = 0;
+
         public override void UpdateBiomes()
 		{
 			ZoneMystic = (MysticCaves.MysticTiles > 500);
