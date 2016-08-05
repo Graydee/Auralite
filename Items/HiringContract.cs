@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Auralite.NPCs;
+using Auralite.WorldContent;
 
 namespace Auralite.Items
 {
@@ -12,6 +13,7 @@ namespace Auralite.Items
 		public override void SetDefaults()
 		{
 			item.name = "Hiring Contract";
+			item.maxStack = 999;
 			item.width = 40;
 			item.height = 40;
 			item.toolTip = "Use this on an NPC to hire them!";
@@ -39,22 +41,22 @@ namespace Auralite.Items
 
 		public override bool UseItem(Player player)
 		{
+			AuralitePlayer modPlayer = player.GetModPlayer<AuralitePlayer>(mod);
+			MercData mercData = (MercData)mod.GetModWorld("MercData");
 			//Loop through all NPCs, checking if one is under the cursor
 			foreach(NPC npc in Main.npc) {
-				AuraNPCInfo info = npc.GetModInfo<AuraNPCInfo>(mod);
-				if(npc.townNPC && npc.Hitbox.Intersects(new Rectangle((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y, 1, 1))) {
-					if(!info.hired) {
-						info.hired = true;  //Hire this NPC
-
-						//Display successful hiring message
-						string[] messages = { "At your service!", "Let's go!" };
-						Main.NewText(npc.displayName + ": " + messages[Main.rand.Next(0, messages.Length)], 0, 255, 0);
+				if(npc.townNPC && npc.Hitbox.Intersects(new Rectangle((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y, 1, 1)) && modPlayer.partySize < modPlayer.maxPartySize) {
+					if(!mercData.Hired(npc.type, npc.displayName)) {
+						mercData.Hire(npc.type, npc.displayName, player.whoAmI);
+						((Auralite)mod).DisplayCustomMessage(npc, Auralite.Hire);
+					} else if(player.whoAmI != mercData.GetOwner(npc.type, npc.displayName)) {
+						((Auralite)mod).DisplayCustomMessage(npc, Auralite.AltFail);
+						item.stack++; //Stops item from being consumed
 					} else {
-						//Display failed hiring message in red
-						string[] messages = { "What's the big idea?", "I'm already under contract." };
-						Main.NewText(npc.displayName + ": " + messages[Main.rand.Next(0, messages.Length)], 255, 0, 0);
-						return false; //Don't consume the item, hopefully?
+						((Auralite)mod).DisplayCustomMessage(npc, Auralite.Fail);
+						item.stack++; //Stops item from being consumed
 					}
+					break;
 				}
 			}
 			return true;

@@ -19,6 +19,18 @@ namespace Auralite
 		public int maxPartySize = 4;
 		public int partySize = 0;
 
+		public override void ResetEffects()
+		{
+			partySize = 0;
+
+			//Keep current party size properly updated
+			foreach(int val in ((MercData)mod.GetModWorld("MercData")).data.Values) {
+				if(val == player.whoAmI) {
+					partySize++;
+				}
+			}
+		}
+
         public override void UpdateBiomes()
 		{
 			ZoneMystic = (MysticCaves.MysticTiles > 500);
