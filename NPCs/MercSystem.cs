@@ -23,7 +23,7 @@ namespace Auralite.NPCs
 			//Increase NPC damage by 20% while hired;
 			MercData mercData = (MercData)mod.GetModWorld("MercData");
 			if(mercData.Hired(npc.type, npc.displayName)) {
-				damage = (int)(damage * 1.2);
+				damage = (int)(damage * 2.0);
 			}
 		}
 
@@ -44,16 +44,50 @@ namespace Auralite.NPCs
 			}
 			return true;
 		}
-
+		public override void NPCLoot(NPC npc)
+		{
+			Player player = Main.player[Main.myPlayer];
+						AuralitePlayer modPlayer = player.GetModPlayer<AuralitePlayer>(mod);
+			MercData mercData = (MercData)mod.GetModWorld("MercData");
+			if (npc.townNPC && mercData.Hired(npc.type, npc.displayName))
+			{
+				modPlayer.partySize --;
+			}
+		}
 		public override void AI(NPC npc)
 		{
 			npc.VanillaAI();
-
+	
 			MercData mercData = (MercData)mod.GetModWorld("MercData");
 			if(npc.townNPC && mercData.Hired(npc.type, npc.displayName)) {
 				//Restore velocity, preventing any changes from original AI
+				Player player = Main.player[Main.myPlayer];
 				npc.velocity.X = npc.ai[2];
-				npc.velocity.Y = npc.ai[3];
+				//npc.velocity.Y = npc.ai[3];
+				if (npc.Center.X >= player.Center.X && npc.velocity.X >= -4 && Main.rand.Next(2) == 1) // flies to players x position
+				{
+					npc.velocity.X = npc.velocity.X - 0.2f;
+				}
+				if (npc.Center.X >= player.Center.X && npc.velocity.X >= -4 && npc.velocity.X <= -2 && Main.rand.Next(2) == 1) // flies to players x position
+				{
+					npc.velocity.X = npc.velocity.X - 0.2f;
+				}
+				if (npc.velocity.X >= 0)	
+				{
+					npc.spriteDirection = 1;
+				}
+				if (npc.velocity.X < 0)	
+				{
+					npc.spriteDirection = -1;
+				}
+				if (npc.Center.X <= player.Center.X && npc.velocity.X <= 4 && Main.rand.Next(2) == 1)
+				{
+					npc.velocity.X = npc.velocity.X + 0.2f;
+				}
+				if (npc.Center.X <= player.Center.X && npc.velocity.X <= 4 && npc.velocity.X >= 2 && Main.rand.Next(2) == 1)
+				{
+					npc.velocity.X = npc.velocity.X + 0.2f;
+				}					
 			}
 		}
     }

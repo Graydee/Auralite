@@ -16,7 +16,7 @@ namespace Auralite
         public bool ZoneMystic = false;
 		public bool ZoneSlime = false;
 		public bool ZoneSpring = false;
-		public int maxPartySize = 4;
+		public int maxPartySize = 400;
 		public int partySize = 0;
 
 		public override void ResetEffects()
