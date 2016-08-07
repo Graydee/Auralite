@@ -32,7 +32,7 @@ namespace Auralite.Items
 			//Loop through all NPCs, checking if one is under the cursor
 			foreach(NPC npc in Main.npc) {
 				if(npc.townNPC && npc.Hitbox.Intersects(new Rectangle((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y, 1, 1))
-					&& modPlayer.partySize < modPlayer.maxPartySize) {
+					&& modPlayer.partySize < MercData.maxPartySize) {
 					return true;
 				}
 			}
@@ -45,9 +45,9 @@ namespace Auralite.Items
 			MercData mercData = (MercData)mod.GetModWorld("MercData");
 			//Loop through all NPCs, checking if one is under the cursor
 			foreach(NPC npc in Main.npc) {
-				if(npc.townNPC && npc.Hitbox.Intersects(new Rectangle((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y, 1, 1)) && modPlayer.partySize < modPlayer.maxPartySize) {
-					if(!mercData.Hired(npc.type, npc.displayName)) {
-						mercData.Hire(npc.type, npc.displayName, player.whoAmI);
+				if(npc.townNPC && npc.Hitbox.Intersects(new Rectangle((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y, 1, 1)) && modPlayer.partySize < MercData.maxPartySize) {
+					if(!mercData.Hired(npc)) {
+						mercData.Hire(npc, player.whoAmI);
 						((Auralite)mod).DisplayCustomMessage(npc, Auralite.Hire);
 					} else if(player.whoAmI != mercData.GetOwner(npc.type, npc.displayName)) {
 						((Auralite)mod).DisplayCustomMessage(npc, Auralite.AltFail);

@@ -31,6 +31,9 @@ namespace Auralite
 		//The various attack styles of NPCs. This is what gives them their attacks.
 		public Dictionary<int, Action<NPC>> attackStyles = new Dictionary<int, Action<NPC>>();
 
+		//This is the custom AI style of NPCs. It's what makes them actually smart and useful.
+		public Dictionary<int, Action<NPC>> aiStyle = new Dictionary<int, Action<NPC>>();
+
 		public Auralite()
 		{
 			Properties = new ModProperties()

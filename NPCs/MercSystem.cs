@@ -15,12 +15,13 @@ namespace Auralite.NPCs
 		{
 			MercData mercData = (MercData)mod.GetModWorld("MercData");
 			mercData.Fire(npc.type, npc.displayName);
+			mercData.CleanData();
 			return base.PreNPCLoot(npc);
 		}
 
 		public override void TownNPCAttackStrength(NPC npc, ref int damage, ref float knockback)
 		{
-			//Increase NPC damage by 20% while hired;
+			//Increase NPC damage by 20% while hired
 			MercData mercData = (MercData)mod.GetModWorld("MercData");
 			if(mercData.Hired(npc.type, npc.displayName)) {
 				damage = (int)(damage * 2.0);
@@ -36,28 +37,25 @@ namespace Auralite.NPCs
 				npc.ai[2] = npc.velocity.X;
 				npc.ai[3] = npc.velocity.Y;
 
+				npc.aiStyle = 0;
+
 				//Prevent talking with this NPC while hired
 				if(Main.player[Main.myPlayer].talkNPC == npc.whoAmI) {
 					Main.player[Main.myPlayer].talkNPC = -1; //Stop talking to NPC
 					((Auralite)mod).DisplayCustomMessage(npc, Auralite.NoShop);
 				}
+			} else if(npc.townNPC) {
+				npc.aiStyle = 7;
 			}
 			return true;
 		}
-		public override void NPCLoot(NPC npc)
-		{
-			Player player = Main.player[Main.myPlayer];
-						AuralitePlayer modPlayer = player.GetModPlayer<AuralitePlayer>(mod);
-			MercData mercData = (MercData)mod.GetModWorld("MercData");
-			if (npc.townNPC && mercData.Hired(npc.type, npc.displayName))
-			{
-				modPlayer.partySize --;
-			}
-		}
+
 		public override void AI(NPC npc)
 		{
-			npc.VanillaAI();
-	
+			//This applies town NPC buffs, even though the NPC no longer has aiStyle 7
+			float damageMult = 1;
+			NPCLoader.BuffTownNPC(ref damageMult, ref npc.defense);
+			
 			MercData mercData = (MercData)mod.GetModWorld("MercData");
 			if(npc.townNPC && mercData.Hired(npc.type, npc.displayName)) {
 				//Restore velocity, preventing any changes from original AI
