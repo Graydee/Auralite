@@ -16,6 +16,7 @@ namespace Auralite
         public bool ZoneMystic = false;
 		public bool ZoneSlime = false;
 		public bool ZoneSpring = false;
+		public bool ZoneFlame = false;
 		public int partySize = 0;
 
 		public override void ResetEffects()
@@ -35,6 +36,7 @@ namespace Auralite
 			ZoneMystic = (MysticCaves.MysticTiles > 500);
 			ZoneSpring = (Springs.SpringTiles > 300);
 			ZoneSlime = (SlimeNest.SlimeTiles > 500);
+			ZoneFlame = (VolcanicAshes.FlameTiles > 500);
 		}
     }
 }
