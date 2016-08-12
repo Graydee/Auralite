@@ -17,7 +17,7 @@ namespace Auralite.Projectiles
 			projectile.name = "ToxicShroom";
 			projectile.damage = 10; 
 			projectile.light = 0.5f;		
-			projectile.timeLeft = 40;
+			projectile.timeLeft = 60;
 			
 		}
 
