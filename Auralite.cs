@@ -4,7 +4,8 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Auralite.Tiles;
-
+using AlternateDimensions;
+using Auralite.WorldContent;
 
 namespace Auralite
 {
@@ -124,6 +125,26 @@ namespace Auralite
 			}
 					if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneMystic && !Main.gameMenu && playMusic) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/MysticCaves");
+			}
+		}
+
+		public override void PostSetupContent()
+		{
+			Mod alternateDimensions = ModLoader.GetMod("AlternateDimensions");
+			DimNebula dimNebula = ((DimNebula)GetModWorld("DimNebula"));
+			DimSolar dimSolar = ((DimSolar)GetModWorld("DimSolar"));
+			DimStardust dimStardust = ((DimStardust)GetModWorld("DimStardust"));
+			DimVortex dimVortex = ((DimVortex)GetModWorld("DimVortex"));
+			if (alternateDimensions != null)
+			{
+				AlternateDimensionInterface.RegisterDimension(Name, "Nebula", dimNebula.GenerateNebulaDimension);
+				AlternateDimensionInterface.RegisterDimension(Name, "Solar", dimSolar.GenerateSolarDimension);
+				AlternateDimensionInterface.RegisterDimension(Name, "Stardust", dimStardust.GenerateStardustDimension);
+				AlternateDimensionInterface.RegisterDimension(Name, "Vortex", dimVortex.GenerateVortexDimension);
+			}
+			else
+			{
+				throw new Exception("For some reason, Auralite was allowed to load without Alternate Dimensions");
 			}
 		}
 	}
