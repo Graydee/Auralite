@@ -1,3 +1,11 @@
-author = Graydee &amp; Dev team
-version = 0.1
+author = Graydee & The dev team
+version = 1.0
 displayName = Auralite
+homepage = 
+hideCode = false
+hideResources = false
+includeSource = true
+buildIgnore = *.csproj, *.user, obj/*, bin/*, .vs/*, Sprite Gallery/*, .git/*
+includePDB = true
+noCompile = false
+modReferences = AlternateDimensions
