@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Auralite.Buffs
 {
-	public class LanternBuff : ModBuff
+	public class StolenTime : ModBuff
 	{
 		public override void SetDefaults()
 		{
