@@ -22,7 +22,7 @@ namespace Auralite.Projectiles
         {
             for (int i = 0; i < 5; i++)
             {
-                int dust = Dust.NewDust(projectile.position, projectile.width, projectile.height, 0);
+                Dust.NewDust(projectile.position, projectile.width, projectile.height, 0);
             }
         }
 		public override bool OnTileCollide(Vector2 oldVelocity)

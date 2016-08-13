@@ -16,15 +16,10 @@ namespace Auralite.WorldContent
 			//Position of rectangle is the top-right corner of the dimension. So it'll be (X, 0).
 			//Width of the rectangle is always 500 for now, unless we get custom sizes in the future.
 			//Height of the rectangle means nothing that I am aware of. It's probably just the world height.
-			InitTilesInRect(rect);
-		}
+			DimLib.InitDimension(rect);
 
-		public static void InitTilesInRect(Rectangle rect){
-			for(int i = rect.X; i < rect.Right; i++) {
-				for(int j = 0; j < rect.Height; j++) {
-					Main.tile[i, j] = new Tile();
-				}
-			}
+			//Places a dirt by activating the tile. Default tile type is 0 (dirt) but is inactive (air)
+			Main.tile[rect.Width / 2 + rect.X, rect.Height / 2].active(true);
 		}
 	}
 }
