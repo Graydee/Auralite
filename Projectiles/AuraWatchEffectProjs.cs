@@ -15,9 +15,8 @@ namespace Auralite.Projectiles
             AuralitePlayer modPlayer = player.GetModPlayer<AuralitePlayer>(mod);
             if (modPlayer.auraWatch)
             {
-                if (modPlayer.freezeTime > 0)
+                if (player.HasBuff(mod.BuffType("StolenTime")) >= 0)
                 {
-                    modPlayer.freezeTime -= 1;
                     projectile.velocity *= 0;
                     return false;
                 }
