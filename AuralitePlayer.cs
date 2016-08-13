@@ -46,7 +46,7 @@ namespace Auralite
             {
                     if (Main.rand.Next(50) == 0)
                     {
-                        freezeTime = 500;
+                    player.AddBuff(mod.BuffType("StolenTime"), 120);
                     }
                 
             }
