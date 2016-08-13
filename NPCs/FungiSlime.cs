@@ -30,23 +30,12 @@ namespace Auralite.NPCs
 			return Main.tile[(int)(spawnInfo.spawnTileX),(int)(spawnInfo.spawnTileY)].type == mod.TileType("SlimeMoss")/* || Main.player[(int)Player.FindClosest(npc.position, npc.width, npc.height)].GetModPlayer<CrystalPlayer>(mod).ZoneCrystal*/ ? 1020f : 0f;
 		}
 
-	/*	public override void HitEffect(int hitDirection, double damage)
-		{
-			if(npc.life <= 0) {
-				//spawn gore set
-				for(int i = 1; i <= 4; i++) {
-					Gore.NewGore(npc.position, npc.velocity, mod.GetGoreSlot("Gores/Crystal_Slime_Gore_" + i));
-				}
-			}
-		}
-
 		public override void NPCLoot()
 		{
-			if (Main.rand.Next(2) == 0)
-			{
-				Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("ShinyGemstone"));
-			}
-		} */
+
+				Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("FungiGel"), Main.rand.Next(1, 5));
+			
+		}
 		
 		  public override void AI()
 		  {
