@@ -15,11 +15,10 @@ namespace Auralite.NPCs
             AuralitePlayer modPlayer = player.GetModPlayer<AuralitePlayer>(mod);
             if (modPlayer.auraWatch)
             {
-                if (modPlayer.freezeTime > 0)
-                {
+                if (player.HasBuff(mod.BuffType("StolenTime")) >= 0)
+                    {
                     if (!npc.boss)
                     {
-                        modPlayer.freezeTime -= 1;
                         npc.velocity *= 0;
                         return false;
                     }
