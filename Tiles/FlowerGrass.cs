@@ -12,6 +12,7 @@ namespace Auralite.Tiles
 			Main.tileMergeDirt[Type] = true;
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
+			SetModTree(new FlowerTree());
 			AddMapEntry(new Color(162, 222, 184));
 		}
 
