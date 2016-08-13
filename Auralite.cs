@@ -1,15 +1,24 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Auralite.Tiles;
-
+using Auralite.NPCs;
+using Auralite.WorldContent;
+using AlternateDimensions;
 
 namespace Auralite
 {
 	class Auralite : Mod
 	{
+		public override string Name {
+			get {
+				return "Auralite";
+			}
+		}
+
 		public const int Hire = 0;
 		public const int Fail = 1;
 		public const int Fire = 2;
@@ -28,11 +37,10 @@ namespace Auralite
 		public Dictionary<int, string[]> altFailMessages = new Dictionary<int, string[]>();
 		public Dictionary<int, string[]> noShopMessages = new Dictionary<int, string[]>();
 
-		//The various attack styles of NPCs. This is what gives them their attacks.
+		//AI related objects
 		public Dictionary<int, Action<NPC>> attackStyles = new Dictionary<int, Action<NPC>>();
-
-		//This is the custom AI style of NPCs. It's what makes them actually smart and useful.
 		public Dictionary<int, Action<NPC>> aiStyle = new Dictionary<int, Action<NPC>>();
+		public MercAI mercAI = new MercAI();
 
 		public Auralite()
 		{
@@ -60,6 +68,12 @@ namespace Auralite
 
 			AddCustomMessages(-1, defHireMessages, defFailMessages, defFireMessages, defAltFailMessages, defNoShopMessages);
 			AddCustomMessages(NPCID.Dryad, dryadHireMessages, dryadFailMessages, dryadFireMessages, dryadAltFailMessages, dryadNoShopMessages); 
+
+			mercAI.LoadAIMethods();
+			aiStyle.Add(NPCID.Guide, mercAI.AttackAIGuide);
+			aiStyle.Add(NPCID.DyeTrader, mercAI.AttackAIDyeTrader);
+			aiStyle.Add(NPCID.Dryad, mercAI.AttackAIDryad);
+			aiStyle.Add(NPCID.Nurse, mercAI.AINurse);
 		}
 
 		public void AddCustomMessages(int npcID, string[] hire, string[] fail, string[] fire, string[] altFail, string[] noShop){
@@ -124,6 +138,21 @@ namespace Auralite
 			}
 					if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneMystic && !Main.gameMenu && playMusic) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/MysticCaves");
+			}
+		}
+
+		public override void PostSetupContent()
+		{
+			Mod altDimensions = ModLoader.GetMod("AlternateDimensions");
+			DimNebula nebula = (DimNebula)GetModWorld("DimNebula");
+			DimSolar solar = (DimSolar)GetModWorld("DimSolar");
+			DimStardust stardust = (DimStardust)GetModWorld("DimStardust");
+			DimVortex vortex = (DimVortex)GetModWorld("DimVortex");
+			if(altDimensions != null) {
+				AlternateDimensionInterface.RegisterDimension(this.Name, "Nebula", nebula.GenerateNebulaDimension);
+				AlternateDimensionInterface.RegisterDimension(this.Name, "Solar", solar.GenerateSolarDimension);
+				AlternateDimensionInterface.RegisterDimension(this.Name, "Stardust", stardust.GenerateStardustDimension);
+				AlternateDimensionInterface.RegisterDimension(this.Name, "Vortex", vortex.GenerateVortexDimension);
 			}
 		}
 	}
