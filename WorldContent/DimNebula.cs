@@ -35,7 +35,7 @@ namespace Auralite.WorldContent
                 //1 in 40 chance of pillar per tile
                 if(Main.rand.Next(22) == 0) {
                     //pillar starting height is 20% to 30% of world height
-                    int Height = Main.rand.Next((int)(Main.maxTilesY*.17), (int)(Main.maxTilesY*.2));
+                    int Height = Main.rand.Next((int)(Main.maxTilesY*.14), (int)(Main.maxTilesY*.22));
                     //pillar goes to bottom of the world
                     for(int Y = Height; Y < rect.Height; Y++) {
                         DimLib.TileRunner(X, Y, Main.rand.Next(10,16), 1, mod.TileType("NebulaRock"), false, 0f, 0f, true); 
