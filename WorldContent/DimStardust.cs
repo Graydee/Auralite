@@ -31,33 +31,25 @@ namespace Auralite.WorldContent
 
             //place pillars of nebula stone
             //pillars spawn no closer than 100 tiles from edges of world
+			for(int X = rect.X + 25; X < rect.Right - 25; X++) {
+                //1 in 40 chance of pillar per tile
+                    //pillar starting height is 20% to 30% of world height
+                    int Height = 15;
+                    //pillar goes to bottom of the world
+                    for(int Y = Height; Y < rect.Height; Y++) {
+						if(Main.rand.Next(15) == 0) 
+						{
+                        DimLib.TileRunner(X, Y, Main.rand.Next(1,4), 1, mod.TileType("ShinyStardustRock"), false, 0f, 0f, true); 
+                    }
+                }
+            }
             for(int X = rect.X + 25; X < rect.Right - 25; X++) {
                 //1 in 40 chance of pillar per tile
                     //pillar starting height is 20% to 30% of world height
                     int Height = 15;
                     //pillar goes to bottom of the world
                     for(int Y = Height; Y < rect.Height; Y++) {
-						if(Main.rand.Next(20) == 0) 
-						{
-                        DimLib.TileRunner(X, Y, Main.rand.Next(1,4), 1, mod.TileType("StardustRock"), false, 0f, 0f, true); 
-                    }
-					if(Main.rand.Next(2000) == 0) 
-						{
-                        DimLib.TileRunner(X, Y, Main.rand.Next(35,40), 1, mod.TileType("StardustRock"), false, 0f, 0f, true); 
-                    }
-                }
-            }
-			for(int X = rect.X + 40; X < rect.Right - 40; X++) {
-                //1 in 40 chance of pillar per tile
-                    //pillar starting height is 20% to 30% of world height
-                    int Height = 15;
-                    //pillar goes to bottom of the world
-                    for(int Y = Height; Y < rect.Height; Y++) {
-						if(Main.rand.Next(20) == 0) 
-						{
-                        DimLib.TileRunner(X, Y, Main.rand.Next(1,4), 1, mod.TileType("StardustRock"), false, 0f, 0f, true); 
-                    }
-					if(Main.rand.Next(45000) == 0) 
+					if(Main.rand.Next(4500) == 0) 
 						{
                         DimLib.TileRunner(X, Y, Main.rand.Next(35,40), 1, mod.TileType("StardustRock"), false, 0f, 0f, true); 
                     }
