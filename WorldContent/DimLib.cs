@@ -29,6 +29,7 @@ namespace Auralite.WorldContent
 				}
 			}
 		}
+
 		public static void DestroyDirt(Rectangle rect, params System.Action<int, int>[] stuff){
 			for(int i = rect.X; i < rect.Right; i++) {
 				for(int j = 0; j < rect.Height; j++) {
@@ -42,6 +43,7 @@ namespace Auralite.WorldContent
 				}
 			}
 		}
+
 		public static void TileRunner(int i, int j, double strength, int steps, int type, bool addTile = false, float speedX = 0f, float speedY = 0f, bool noYChange = false, bool overRide = true)
         {
             double num = strength;
@@ -104,14 +106,6 @@ namespace Auralite.WorldContent
                             }
                             else
                             {
-                                if (flag && (double)(Math.Abs((float)k - vector.X) + Math.Abs((float)l - vector.Y)) < strength * 0.3 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.01))
-                                {
-                                    WorldGen.PlaceWall(k, l, 180, true);
-                                }
-                                if (flag2 && (double)(Math.Abs((float)k - vector.X) + Math.Abs((float)l - vector.Y)) < strength * 0.3 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.01))
-                                {
-                                    WorldGen.PlaceWall(k, l, 178, true);
-                                }
                                 if (overRide || !Main.tile[k, l].active())
                                 {
                                     Tile tile = Main.tile[k, l];
@@ -210,10 +204,6 @@ namespace Auralite.WorldContent
                                     Main.tile[k, l].active(true);
                                     Main.tile[k, l].liquid = 0;
                                     Main.tile[k, l].lava(false);
-                                }
-                                if (noYChange && (double)l < Main.worldSurface && type != 59)
-                                {
-                                    Main.tile[k, l].wall = 2;
                                 }
                                 if (type == 59 && l > WorldGen.waterLine && Main.tile[k, l].liquid > 0)
                                 {
