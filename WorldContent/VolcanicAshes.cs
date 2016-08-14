@@ -40,7 +40,7 @@ namespace Auralite.WorldContent
 					
 					WorldGen.TileRunner(XvalueMid, YvalueMid, (double)WorldGen.genRand.Next(120,120), 1, mod.TileType("VolcanicAshes"), false, 0f, 0f, true, true); 
 
-                    WorldGen.digTunnel(XvalueMid, YvalueMid, 0, -50, 1, 9, false);
+                    WorldGen.digTunnel(XvalueMid, YvalueMid, 0, -5000, 1, 9, false);
 					}
 					}
 				}

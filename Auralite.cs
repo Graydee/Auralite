@@ -138,6 +138,9 @@ namespace Auralite
 			}
 					if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneMystic && !Main.gameMenu && playMusic) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/MysticCaves");
+					}
+					if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneSpring && !Main.gameMenu && playMusic) {
+					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundSprings");
 			}
 		}
 
