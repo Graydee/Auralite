@@ -11,11 +11,6 @@ namespace Auralite.Items
 {
 	public class TeleVortex : ModItem
 	{
-		public override bool Autoload(ref string name, ref string texture, System.Collections.Generic.IList<EquipType> equips)
-		{
-			texture = "Auralite/Items/HiringContract";
-			return true;
-		}
 
 		public override void SetDefaults()
 		{

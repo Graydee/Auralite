@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Auralite.Tiles
 {
-	public class NebulaRock : ModTile
+	public class StardustRock : ModTile
 	{
 		public override void SetDefaults()
 		{
@@ -14,7 +14,7 @@ namespace Auralite.Tiles
 			Main.tileLighted[Type] = false;
             soundType = 27;
             soundStyle = 2;
-			drop = mod.ItemType("NebulaRock");
+			drop = mod.ItemType("StardustRock");
 			AddMapEntry(new Color(142, 217, 63));
 		}
 
