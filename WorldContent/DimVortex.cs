@@ -34,7 +34,6 @@ namespace Auralite.WorldContent
             for(int X = rect.X + 25; X < rect.Right - 25; X++) {
                 //1 in 40 chance of pillar per tile
                     //pillar starting height is 20% to 30% of world height
-                    int Height = Main.rand.Next((int)(Main.maxTilesY*.17), (int)(Main.maxTilesY*.2));
                     //pillar goes to bottom of the world
                     for(int Y = Height; Y < rect.Height; Y++) {
 						if(Main.rand.Next(400) == 0) 
