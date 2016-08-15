@@ -133,14 +133,20 @@ namespace Auralite
 				if(music == n) playMusic = false;
 			}
 
-			if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneSlime && !Main.gameMenu && playMusic) {
+			if(player.active && !Main.gameMenu && playMusic) {
+				AuralitePlayer modPlayer = player.GetModPlayer<AuralitePlayer>(this);
+				if(modPlayer.ZoneSlime) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/SlimeDen");
-			}
-					if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneMystic && !Main.gameMenu && playMusic) {
+				}
+				if(modPlayer.ZoneMystic) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/MysticCaves");
-					}
-					if(player.active && player.GetModPlayer<AuralitePlayer>(this).ZoneSpring && !Main.gameMenu && playMusic) {
+				}
+				if(modPlayer.ZoneSpring) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundSprings");
+				}
+				if(modPlayer.ZoneStardust) {
+					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/Stardust");
+				}
 			}
 		}
 

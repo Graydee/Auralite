@@ -14,6 +14,12 @@ namespace Auralite.WorldContent
 {
 	public class DimLib
 	{
+		//Returns whether the given x-coordinate is within the given dimension.
+		public static bool InDimension(int x, string modName, string dimName){
+			Rectangle rect = AlternateDimensions.AlternateDimensionInterface.DimensionRectangle(modName, dimName);
+			return rect.Contains(x/16, 1);
+		}
+
 		public static void InitDimension(Rectangle rect){
 			System.Action<int, int> initTile = (x, y) => Main.tile[x, y] = new Tile();
 			DoXInRect(rect, initTile);
@@ -48,31 +54,30 @@ namespace Auralite.WorldContent
         {
             double num = strength;
             float num2 = (float)steps;
-            Vector2 vector;
-            vector.X = (float)i;
-            vector.Y = (float)j;
-            Vector2 vector2;
-            vector2.X = (float)WorldGen.genRand.Next(-10, 11) * 0.1f;
-            vector2.Y = (float)WorldGen.genRand.Next(-10, 11) * 0.1f;
+            Vector2 pos;
+			pos.X = (float)i;
+            pos.Y = (float)j;
+            Vector2 randVect;
+			randVect.X = (float)WorldGen.genRand.Next(-10, 11) * 0.1f;
+            randVect.Y = (float)WorldGen.genRand.Next(-10, 11) * 0.1f;
             if (speedX != 0f || speedY != 0f)
             {
-                vector2.X = speedX;
-                vector2.Y = speedY;
-            }
-            bool flag = type == 368;
-            bool flag2 = type == 367;
+                randVect.X = speedX;
+                randVect.Y = speedY;
+			}
+
             while (num > 0.0 && num2 > 0f)
             {
-                if (vector.Y < 0f && num2 > 0f && type == 59)
+                if (pos.Y < 0f && num2 > 0f && type == 59)
                 {
                     num2 = 0f;
                 }
                 num = strength * (double)(num2 / (float)steps);
                 num2 -= 1f;
-                int num3 = (int)((double)vector.X - num * 0.5);
-                int num4 = (int)((double)vector.X + num * 0.5);
-                int num5 = (int)((double)vector.Y - num * 0.5);
-                int num6 = (int)((double)vector.Y + num * 0.5);
+                int num3 = (int)((double)pos.X - num * 0.5);
+                int num4 = (int)((double)pos.X + num * 0.5);
+                int num5 = (int)((double)pos.Y - num * 0.5);
+                int num6 = (int)((double)pos.Y + num * 0.5);
                 if (num3 < 1)
                 {
                     num3 = 1;
@@ -89,7 +94,7 @@ namespace Auralite.WorldContent
                 {
                     for (int l = num5; l < num6; l++)
                     {
-                        if ((double)(Math.Abs((float)k - vector.X) + Math.Abs((float)l - vector.Y)) < strength * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015))
+                        if ((double)(Math.Abs((float)k - pos.X) + Math.Abs((float)l - pos.Y)) < strength * 0.5 * (1.0 + (double)WorldGen.genRand.Next(-10, 11) * 0.015))
                         {
                         
                             if (type < 0)
@@ -214,79 +219,79 @@ namespace Auralite.WorldContent
                         }
                     }
                 }
-                vector += vector2;
+                pos += randVect;
                 if (num > 50.0)
                 {
-                    vector += vector2;
+                    pos += randVect;
                     num2 -= 1f;
-                    vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                    vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                    randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                    randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                     if (num > 100.0)
                     {
-                        vector += vector2;
+                        pos += randVect;
                         num2 -= 1f;
-                        vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                        vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                        randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                        randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                         if (num > 150.0)
                         {
-                            vector += vector2;
+                            pos += randVect;
                             num2 -= 1f;
-                            vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                            vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                            randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                            randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                             if (num > 200.0)
                             {
-                                vector += vector2;
+                                pos += randVect;
                                 num2 -= 1f;
-                                vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                 if (num > 250.0)
                                 {
-                                    vector += vector2;
+                                    pos += randVect;
                                     num2 -= 1f;
-                                    vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                    vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                    randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                    randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                     if (num > 300.0)
                                     {
-                                        vector += vector2;
+                                        pos += randVect;
                                         num2 -= 1f;
-                                        vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                        vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                        randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                        randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                         if (num > 400.0)
                                         {
-                                            vector += vector2;
+                                            pos += randVect;
                                             num2 -= 1f;
-                                            vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                            vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                            randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                            randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                             if (num > 500.0)
                                             {
-                                                vector += vector2;
+                                                pos += randVect;
                                                 num2 -= 1f;
-                                                vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                                vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                                 if (num > 600.0)
                                                 {
-                                                    vector += vector2;
+                                                    pos += randVect;
                                                     num2 -= 1f;
-                                                    vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                                    vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                    randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                    randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                                     if (num > 700.0)
                                                     {
-                                                        vector += vector2;
+                                                        pos += randVect;
                                                         num2 -= 1f;
-                                                        vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                                        vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                        randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                        randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                                         if (num > 800.0)
                                                         {
-                                                            vector += vector2;
+                                                            pos += randVect;
                                                             num2 -= 1f;
-                                                            vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                                            vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                            randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                            randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                                             if (num > 900.0)
                                                             {
-                                                                vector += vector2;
+                                                                pos += randVect;
                                                                 num2 -= 1f;
-                                                                vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                                                                vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                                randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                                                                randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
                                                             }
                                                         }
                                                     }
@@ -299,55 +304,55 @@ namespace Auralite.WorldContent
                         }
                     }
                 }
-                vector2.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                if (vector2.X > 1f)
+                randVect.X += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                if (randVect.X > 1f)
                 {
-                    vector2.X = 1f;
+                    randVect.X = 1f;
                 }
-                if (vector2.X < -1f)
+                if (randVect.X < -1f)
                 {
-                    vector2.X = -1f;
+                    randVect.X = -1f;
                 }
                 if (!noYChange)
                 {
-                    vector2.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
-                    if (vector2.Y > 1f)
+                    randVect.Y += (float)WorldGen.genRand.Next(-10, 11) * 0.05f;
+                    if (randVect.Y > 1f)
                     {
-                        vector2.Y = 1f;
+                        randVect.Y = 1f;
                     }
-                    if (vector2.Y < -1f)
+                    if (randVect.Y < -1f)
                     {
-                        vector2.Y = -1f;
+                        randVect.Y = -1f;
                     }
                 }
                 else if (type != 59 && num < 3.0)
                 {
-                    if (vector2.Y > 1f)
+                    if (randVect.Y > 1f)
                     {
-                        vector2.Y = 1f;
+                        randVect.Y = 1f;
                     }
-                    if (vector2.Y < -1f)
+                    if (randVect.Y < -1f)
                     {
-                        vector2.Y = -1f;
+                        randVect.Y = -1f;
                     }
                 }
                 if (type == 59 && !noYChange)
                 {
-                    if ((double)vector2.Y > 0.5)
+                    if ((double)randVect.Y > 0.5)
                     {
-                        vector2.Y = 0.5f;
+                        randVect.Y = 0.5f;
                     }
-                    if ((double)vector2.Y < -0.5)
+                    if ((double)randVect.Y < -0.5)
                     {
-                        vector2.Y = -0.5f;
+                        randVect.Y = -0.5f;
                     }
-                    if ((double)vector.Y < Main.rockLayer + 100.0)
+                    if ((double)pos.Y < Main.rockLayer + 100.0)
                     {
-                        vector2.Y = 1f;
+                        randVect.Y = 1f;
                     }
-                    if (vector.Y > (float)(Main.maxTilesY - 300))
+                    if (pos.Y > (float)(Main.maxTilesY - 300))
                     {
-                        vector2.Y = -1f;
+                        randVect.Y = -1f;
                     }
                 }
             }

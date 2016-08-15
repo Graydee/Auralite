@@ -28,10 +28,9 @@ namespace Auralite.Items
 		public override bool UseItem(Player player)
 		{
 			//return to overworld if not in dimension
-			if(player.position.X / 16 >= AlternateDimensionInterface.DimensionRectangle(mod.Name, "Nebula").X
-			   && player.position.X / 16 < AlternateDimensionInterface.DimensionRectangle(mod.Name, "Nebula").Width) {
+			if(player.GetModPlayer<AuralitePlayer>(mod).ZoneNebula) {
 				player.Teleport(new Vector2(player.SpawnX, player.SpawnY));
-			} else {
+			} else if(player.whoAmI == Main.myPlayer) {
 				AlternateDimensionInterface.DimensionSwap(mod.Name, "Nebula");
 			}
 			return true;

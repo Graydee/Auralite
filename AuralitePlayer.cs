@@ -13,6 +13,10 @@ namespace Auralite
 {
 	public class AuralitePlayer : ModPlayer
 	{
+		public bool ZoneNebula { get{ return DimLib.InDimension((int)player.position.X, mod.Name, "Nebula"); } }
+		public bool ZoneSolar { get{ return DimLib.InDimension((int)player.position.X, mod.Name, "Solar"); } }
+		public bool ZoneStardust { get{ return DimLib.InDimension((int)player.position.X, mod.Name, "Stardust"); } }
+		public bool ZoneVortex { get{ return DimLib.InDimension((int)player.position.X, mod.Name, "Vortex"); } }
         public bool ZoneMystic = false;
 		public bool ZoneSlime = false;
 		public bool ZoneSpring = false;
