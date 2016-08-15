@@ -150,6 +150,9 @@ namespace Auralite
 				if(modPlayer.ZoneNebula) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/Nebula1");
 				}
+				if(modPlayer.ZoneVortex) {
+					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/Vortex1");
+				}
 			}
 		}
 
