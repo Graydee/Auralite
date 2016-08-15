@@ -147,6 +147,9 @@ namespace Auralite
 				if(modPlayer.ZoneStardust) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/Stardust");
 				}
+				if(modPlayer.ZoneVortex) {
+					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/Vortex1");
+				}
 			}
 		}
 
