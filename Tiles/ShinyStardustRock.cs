@@ -8,7 +8,6 @@ namespace Auralite.Tiles
 	{
 		public override void SetDefaults()
 		{
-			Main.tileLighted[Type] = true;
 			Main.tileSolid[Type] = true;
 			Main.tileMergeDirt[Type] = true;
 			Main.tileBlockLight[Type] = true;
