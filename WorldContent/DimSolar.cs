@@ -38,11 +38,11 @@ namespace Auralite.WorldContent
                     //pillar goes to bottom of the world
                     for(int X = rect.X + 25; X < rect.Right - 25; X++) {
                         DimLib.TileRunner(X, Y, Main.rand.Next(14,17), 1, mod.TileType("SolarRock"), false, 0f, 0f, true); 
-						if(Main.rand.Next(100) == 0) {
-							DimLib.TileRunner(X, Y - 6, 18, 1, mod.TileType("SolarRock"), false, 0f, 0f, true); 
+						if(Main.rand.Next(80) == 0) {
+							DimLib.TileRunner(X, Y -12, 25, 1, mod.TileType("SolarRock"), false, 0f, 0f, true); 
 						}
-						if(Main.rand.Next(100) == 0) {
-							DimLib.TileRunner(X, Y + 6, 18, 1, mod.TileType("SolarRock"), false, 0f, 0f, true); 
+						if(Main.rand.Next(80) == 0) {
+							DimLib.TileRunner(X, Y + 12, 25, 1, mod.TileType("SolarRock"), false, 0f, 0f, true); 
 						}
                     }
                 }

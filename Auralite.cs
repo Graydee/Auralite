@@ -155,6 +155,9 @@ namespace Auralite
 				if(modPlayer.ZoneMystic) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/MysticCaves");
 				}
+				if(modPlayer.ZoneFlower) {
+					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/FlowerForest");
+				}
 				if(modPlayer.ZoneSpring) {
 					music = this.GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundSprings");
 				}

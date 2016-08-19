@@ -33,9 +33,42 @@ namespace Auralite.WorldContent
             //pillars spawn no closer than 100 tiles from edges of world
             for(int X = rect.X + 25; X < rect.Right - 25; X++) {
                 //1 in 40 chance of pillar per tile
-                if(Main.rand.Next(22) == 0) {
+                if(Main.rand.Next(62) == 0) {
                     //pillar starting height is 20% to 30% of world height
                     int Height = Main.rand.Next((int)(Main.maxTilesY*.14), (int)(Main.maxTilesY*.22));
+                    //pillar goes to bottom of the world
+                    for(int Y = Height; Y < rect.Height; Y++) {
+                        DimLib.TileRunner(X, Y, Main.rand.Next(10,16), 1, mod.TileType("NebulaRock"), false, 0f, 0f, true); 
+                    }
+                }
+            }
+			 for(int X = rect.X + 25; X < rect.Right - 25; X++) {
+                //1 in 40 chance of pillar per tile
+                if(Main.rand.Next(62) == 0) {
+                    //pillar starting height is 20% to 30% of world height
+                    int Height = Main.rand.Next((int)(Main.maxTilesY*.24), (int)(Main.maxTilesY*.32));
+                    //pillar goes to bottom of the world
+                    for(int Y = Height; Y < rect.Height; Y++) {
+                        DimLib.TileRunner(X, Y, Main.rand.Next(10,16), 1, mod.TileType("NebulaRock"), false, 0f, 0f, true); 
+                    }
+                }
+            }
+			 for(int X = rect.X + 25; X < rect.Right - 25; X++) {
+                //1 in 40 chance of pillar per tile
+                if(Main.rand.Next(62) == 0) {
+                    //pillar starting height is 20% to 30% of world height
+                    int Height = Main.rand.Next((int)(Main.maxTilesY*.34), (int)(Main.maxTilesY*.42));
+                    //pillar goes to bottom of the world
+                    for(int Y = Height; Y < rect.Height; Y++) {
+                        DimLib.TileRunner(X, Y, Main.rand.Next(10,16), 1, mod.TileType("NebulaRock"), false, 0f, 0f, true); 
+                    }
+                }
+            }
+			 for(int X = rect.X + 25; X < rect.Right - 25; X++) {
+                //1 in 40 chance of pillar per tile
+                if(Main.rand.Next(62) == 0) {
+                    //pillar starting height is 20% to 30% of world height
+                    int Height = Main.rand.Next((int)(Main.maxTilesY*.44), (int)(Main.maxTilesY*.52));
                     //pillar goes to bottom of the world
                     for(int Y = Height; Y < rect.Height; Y++) {
                         DimLib.TileRunner(X, Y, Main.rand.Next(10,16), 1, mod.TileType("NebulaRock"), false, 0f, 0f, true); 

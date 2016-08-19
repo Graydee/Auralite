@@ -36,7 +36,7 @@ namespace Auralite.WorldContent
                     yAxis++;
                     xAxis = XTILE;
 
-                for (int i = 0; i < 200; i++)
+                for (int i = 0; i < 300; i++)
                 {
                     xAxis++;
 
@@ -45,7 +45,7 @@ namespace Auralite.WorldContent
                         {
                             if (Main.tile[xAxis, yAxis].active())
                             {
-                                int[] TileArray = { 0, 53, 112, 234, 116, 59, 147, 40};
+                                int[] TileArray = { 0, 1, 53, 112, 234, 116, 59, 147, 40};
                                 for (int BiomeDirtReplace = 0; BiomeDirtReplace < 7; BiomeDirtReplace++)
                                 {
                                     if (Main.tile[xAxis, yAxis].type == (ushort)TileArray[BiomeDirtReplace])
@@ -95,7 +95,7 @@ namespace Auralite.WorldContent
                                     }
                                 }
 
-                                int[] TileArray1 = { 2, 23, 60, 199 };
+                                int[] TileArray1 = { 2, 1, 23, 60, 199 };
                                 for (int BiomeGrassReplace = 0; BiomeGrassReplace < 3; BiomeGrassReplace++)
                                 {
                                     if (Main.tile[xAxis, yAxis].type == (ushort)TileArray1[BiomeGrassReplace])
@@ -161,9 +161,9 @@ namespace Auralite.WorldContent
         public override void PostWorldGen()
         {
         }
-      /*  public override void TileCountsAvailable(int[] tileCounts)
+        public override void TileCountsAvailable(int[] tileCounts)
 		{
-			FlameTiles = tileCounts[mod.TileType("VolcanicAshes")];
-		}*/
+			FlowerTiles = tileCounts[mod.TileType("FlowerGrass")];
+		}
 	}
 }

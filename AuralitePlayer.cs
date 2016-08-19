@@ -21,6 +21,7 @@ namespace Auralite
         public bool ZoneMystic = false;
 		public bool ZoneSlime = false;
 		public bool ZoneSpring = false;
+		public bool ZoneFlower = false;
 		public bool ZoneFlame = false;
 		public int partySize = 0;
         public bool auraWatch = false;
@@ -43,6 +44,7 @@ namespace Auralite
 			ZoneMystic = (MysticCaves.MysticTiles > 500);
 			ZoneSpring = (Springs.SpringTiles > 300);
 			ZoneSlime = (SlimeNest.SlimeTiles > 500);
+			ZoneFlower = (FlowerForest.FlowerTiles > 500);
 			ZoneFlame = (VolcanicAshes.FlameTiles > 500);
 		}
 
