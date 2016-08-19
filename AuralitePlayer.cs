@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Graphics.Effects;
 using Auralite.WorldContent;
 
 namespace Auralite
@@ -44,6 +45,20 @@ namespace Auralite
 			ZoneSlime = (SlimeNest.SlimeTiles > 500);
 			ZoneFlame = (VolcanicAshes.FlameTiles > 500);
 		}
+
+		public override void UpdateBiomeVisuals()
+		{
+			if(ZoneNebula) {
+				//Filters.Scene.Activate("Auralite:Nebula", player.position, new object[0]);
+				//SkyManager.Instance.Activate("Auralite:Nebula", player.position, new object[0]);
+
+			}
+			player.ManageSpecialBiomeVisuals("Auralite:NebulaSky", ZoneNebula, player.Center);
+			player.ManageSpecialBiomeVisuals("Auralite:SolarSky", ZoneSolar, player.Center);
+			player.ManageSpecialBiomeVisuals("Auralite:StardustSky", ZoneStardust, player.Center);
+			player.ManageSpecialBiomeVisuals("Auralite:VortexSky", ZoneVortex, player.Center);
+		}
+
         public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
         {
             if(auraWatch)

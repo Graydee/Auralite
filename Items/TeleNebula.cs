@@ -29,7 +29,7 @@ namespace Auralite.Items
 		{
 			//return to overworld if not in dimension
 			if(player.GetModPlayer<AuralitePlayer>(mod).ZoneNebula) {
-				player.Teleport(new Vector2(player.SpawnX, player.SpawnY));
+				AlternateDimensionInterface.DimensionSwap("vanilla", "vanillaarea");
 			} else if(player.whoAmI == Main.myPlayer) {
 				AlternateDimensionInterface.DimensionSwap(mod.Name, "Nebula");
 			}

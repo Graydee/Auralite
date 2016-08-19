@@ -4,9 +4,12 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
 using Auralite.Tiles;
 using Auralite.NPCs;
 using Auralite.WorldContent;
+using Auralite.WorldContent.Skies;
 using AlternateDimensions;
 
 namespace Auralite
@@ -55,6 +58,7 @@ namespace Auralite
 
 		public override void Load()
 		{
+			//party system info loading
 			string[] defHireMessages = { "At your service!", "Let's go!" };
 			string[] defFailMessages = { "What's the big idea?", "I'm already under contract." };
 			string[] defFireMessages = { "Thanks for the cash!", "What an adventure!" };
@@ -74,6 +78,16 @@ namespace Auralite
 			aiStyle.Add(NPCID.DyeTrader, mercAI.AttackAIDyeTrader);
 			aiStyle.Add(NPCID.Dryad, mercAI.AttackAIDryad);
 			aiStyle.Add(NPCID.Nurse, mercAI.AINurse);
+
+			//custom sky loading
+			Filters.Scene["Auralite:NebulaSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(1f, 0f, 0.9f).UseOpacity(0.5f), EffectPriority.High);
+			Filters.Scene["Auralite:SolarSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(1f, 0.7f, 0f).UseOpacity(0.3f), EffectPriority.High);
+			Filters.Scene["Auralite:StardustSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(0f, 0.5f, 1f).UseOpacity(0.5f), EffectPriority.High);
+			Filters.Scene["Auralite:VortexSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(0f, 0.7f, 0.7f).UseOpacity(0.5f), EffectPriority.High);
+			SkyManager.Instance["Auralite:NebulaSky"] = new DimNebulaSky();
+			SkyManager.Instance["Auralite:SolarSky"] = new DimSolarSky();
+			SkyManager.Instance["Auralite:StardustSky"] = new DimStardustSky();
+			SkyManager.Instance["Auralite:VortexSky"] = new DimVortexSky();
 		}
 
 		public void AddCustomMessages(int npcID, string[] hire, string[] fail, string[] fire, string[] altFail, string[] noShop){
