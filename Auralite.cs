@@ -80,10 +80,10 @@ namespace Auralite
 			aiStyle.Add(NPCID.Nurse, mercAI.AINurse);
 
 			//custom sky loading
-			Filters.Scene["Auralite:NebulaSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(1f, 0f, 0.9f).UseOpacity(0.5f), EffectPriority.High);
-			Filters.Scene["Auralite:SolarSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(1f, 0.7f, 0f).UseOpacity(0.3f), EffectPriority.High);
-			Filters.Scene["Auralite:StardustSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(0f, 0.5f, 1f).UseOpacity(0.5f), EffectPriority.High);
-			Filters.Scene["Auralite:VortexSky"] = new Filter(new ScreenShaderData("FilterTower").UseColor(0f, 0.7f, 0.7f).UseOpacity(0.5f), EffectPriority.High);
+			Filters.Scene["Auralite:NebulaSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(1f, 0f, 0.9f).UseOpacity(0.5f), EffectPriority.High);
+			Filters.Scene["Auralite:SolarSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(1f, 0.7f, 0f).UseOpacity(0.3f), EffectPriority.High);
+			Filters.Scene["Auralite:StardustSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0f, 0.5f, 1f).UseOpacity(0.5f), EffectPriority.High);
+			Filters.Scene["Auralite:VortexSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0f, 0.7f, 0.7f).UseOpacity(0.5f), EffectPriority.High);
 			SkyManager.Instance["Auralite:NebulaSky"] = new DimNebulaSky();
 			SkyManager.Instance["Auralite:SolarSky"] = new DimSolarSky();
 			SkyManager.Instance["Auralite:StardustSky"] = new DimStardustSky();
