@@ -28,7 +28,6 @@ namespace Auralite.WorldContent
 		public static void DoXInRect(Rectangle rect, params System.Action<int, int>[] stuff){
 			for(int i = rect.X; i < rect.Right; i++) {
 				for(int j = 0; j < rect.Height; j++) {
-					Main.tile[i, j] = new Tile();
 					foreach(System.Action<int, int> action in stuff) {
 						action(i, j);
 					}
@@ -39,9 +38,9 @@ namespace Auralite.WorldContent
 		public static void DestroyDirt(Rectangle rect, params System.Action<int, int>[] stuff){
 			for(int i = rect.X; i < rect.Right; i++) {
 				for(int j = 0; j < rect.Height; j++) {
-					if (Main.tile[i, j].type == TileID.Dirt)
+					if (Main.tile[i, j].type == TileID.Dirt && Main.tile[i, j].active())
 					{
-					Main.tile[i, j] = new Tile();
+						Main.tile[i, j] = new Tile();
 					}
 					foreach(System.Action<int, int> action in stuff) {
 						action(i, j);

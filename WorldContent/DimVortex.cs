@@ -17,7 +17,7 @@ namespace Auralite.WorldContent
             //Position of rectangle is the top-right corner of the dimension. So it'll be (X, 0).
             //Width of the rectangle is always 500 for now, unless we get custom sizes in the future.
             //Height of the rectangle means nothing that I am aware of. It's probably just the world height.
-            DimLib.InitDimension(rect);
+            //DimLib.InitDimension(rect);
 
             Action<int, int> activate = (x, y) => Main.tile[x, y].active(true);
             Action<int, int> deactivate = (x, y) => Main.tile[x, y].active(false);
@@ -45,7 +45,8 @@ namespace Auralite.WorldContent
             }
 
             //remove all the dirt
-            DimLib.DestroyDirt(rect, deactivateDirt);Main.tile[rect.Width / 2 + rect.X, rect.Height / 2].active(true);
+            DimLib.DestroyDirt(rect, deactivateDirt);
+			Main.tile[rect.Width / 2 + rect.X, rect.Height / 2].active(true);
 			}
 	}
 }

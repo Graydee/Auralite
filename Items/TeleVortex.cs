@@ -32,7 +32,7 @@ namespace Auralite.Items
 			if(player.GetModPlayer<AuralitePlayer>(mod).ZoneVortex) {
 				AlternateDimensionInterface.DimensionSwap("vanilla", "vanillaarea");
 			} else if(player.whoAmI == Main.myPlayer) {
-				AlternateDimensionInterface.DimensionSwap(mod.Name, "Vortex");
+				AlternateDimensionInterface.DimensionSwapTeleport(mod.Name, "Vortex", 250, 100, true);
 			}
 			return true;
 		}

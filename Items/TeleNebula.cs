@@ -31,7 +31,7 @@ namespace Auralite.Items
 			if(player.GetModPlayer<AuralitePlayer>(mod).ZoneNebula) {
 				AlternateDimensionInterface.DimensionSwap("vanilla", "vanillaarea");
 			} else if(player.whoAmI == Main.myPlayer) {
-				AlternateDimensionInterface.DimensionSwap(mod.Name, "Nebula");
+				AlternateDimensionInterface.DimensionSwapTeleport(mod.Name, "Nebula", 250, 100, true);
 			}
 			return true;
 		}
