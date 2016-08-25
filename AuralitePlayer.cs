@@ -25,7 +25,9 @@ namespace Auralite
 		public bool ZoneFlame = false;
 		public int partySize = 0;
         public bool auraWatch = false;
+		public bool mysticMirror = false;
         public int freezeTime = 0;
+		
 		public override void ResetEffects()
 		{
 			partySize = 0;
@@ -37,6 +39,7 @@ namespace Auralite
 				}
 			}
             auraWatch = false;
+			mysticMirror = false;
         }
 
         public override void UpdateBiomes()
@@ -71,6 +74,10 @@ namespace Auralite
                     }
                 
             }
+			if(mysticMirror)
+			{
+				Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f, mod.ProjectileType("ShadowBlade"), 28, 0f, player.whoAmI, 0f, 0f);
+			}
         }
     }
 }
