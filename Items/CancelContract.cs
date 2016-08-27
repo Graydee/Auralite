@@ -15,7 +15,7 @@ namespace Auralite.Items
 			texture = "Auralite/Items/HiringContract";
 			return true;
 		}
-
+//testcommit
 		public override void SetDefaults()
 		{
 			item.name = "Cancelling Contract";
