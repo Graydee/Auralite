@@ -35,10 +35,14 @@ namespace Auralite.WorldContent
 			TwilightBiome = true;
 			Main.NewText("The once fantastic elements hang over your skies", Color.Orange.R, Color.Orange.G, Color.Orange.B);
 			int XTILE = WorldGen.genRand.Next(125, Main.maxTilesX - 600);
-            int yAxis = Main.maxTilesY / 7;
+            int yAxis = Main.maxTilesY / 10;
 			for (int xAxis = XTILE; xAxis < XTILE + 250; xAxis++)
 			{
 				DimLib.TileRunner(xAxis, yAxis, (double)WorldGen.genRand.Next(30,30), 1, mod.TileType("TwilightGrass"), true, 0f, 0f, true, true);
+				if (Main.rand.Next(30) == 0)
+				{
+					DimLib.TileRunner(xAxis, yAxis - 7, (double)WorldGen.genRand.Next(30,30), 1, mod.TileType("TwilightGrass"), true, 0f, 0f, true, true);
+				}
 			}
 			// biome gen itself
 
