@@ -13,6 +13,7 @@ namespace Auralite.WorldContent
 	{
 		public static int SpringTiles = 0;
         public int Num;
+		private int Xval;
 
 		public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
 		{
@@ -26,7 +27,7 @@ namespace Auralite.WorldContent
 			{
                 progress.Message = "Making the underground tranquil";
                
-                for (int i = 0; i < (int)Main.maxTilesX / 150; i++)
+                for (int i = 0; i < (int)Main.maxTilesX / 250; i++)
 				{
 					int Xvalue = WorldGen.genRand.Next(50, Main.maxTilesX - 700);
 					int Yvalue = WorldGen.genRand.Next((int)WorldGen.rockLayer - 125, Main.maxTilesY - 700);
@@ -39,23 +40,19 @@ namespace Auralite.WorldContent
                     if (Main.tile[XvalueMid,YvalueMid].type ==  1) // A = x, B = y.
                     { 
 					
-					
-					WorldGen.TileRunner(XvalueMid, YvalueMid, (double)WorldGen.genRand.Next(110,110), 1, mod.TileType("SpringGrass"), false, 0f, 0f, true, true);
-					WorldGen.TileRunner(XvalueMid, YvalueMid, (double)WorldGen.genRand.Next(40,40), 1, mod.TileType("SpringGrassTemp"), false, 0f, 0f, true, true);					//c = x, d = y
-                                                                                                                                                                     		for (int A = Xvalue; A < XvalueHigh; A++)
-                                                                                                                                                                             {
-                                                                                                                                                                                 for (int B = Yvalue; B < YvalueHigh; B++)
-                                                                                                                                                                                 {
-                                                                                                                                                                                     if (Main.tile[A,B] != null)
-                                                                                                                                                                                     {
-                                                                                                                                                                                         if (Main.tile[A,B].type ==  mod.TileType("SpringGrassTemp")) // A = x, B = y.
-                                                                                                                                                                                         { 
-                                                                                                                                                                                             WorldGen.KillTile(A, B);
-                                                                   
-                                                                                                                                                                                         }
-                                                                                                                                                                                     }
-                                                                                                                                                                                 }
-                                                                                                                                                                             }
+					for (Xval = XvalueMid; Xval < XvalueMid + 50; Xval++)
+					{
+					WorldGen.TileRunner(Xval, YvalueMid, (double)WorldGen.genRand.Next(110,150), 1, mod.TileType("SpringGrass"), true, 0f, 0f, true, true);		
+					}			
+					for (Xval = XvalueMid - 5; Xval < XvalueMid + 55; Xval++)
+					{
+						WorldGen.digTunnel(Xval, YvalueMid, 0, 0, 15, 15, false);
+					}
+					for (Xval = XvalueMid + 15; Xval < XvalueMid + 35; Xval++)
+					{
+						WorldGen.digTunnel(Xval, YvalueMid, 0, 0, 25, 25, false);
+					}
+					WorldGen.digTunnel(XvalueMid + 20, YvalueMid, 0, 0, 19, 19, true);			
 					int PlacementY = YvalueMid + WorldGen.genRand.Next(-50, 50);
                         int PlacementX = XvalueMid + WorldGen.genRand.Next(-50, 50);
                         if (Main.tile[PlacementX, PlacementY - 1].type == mod.TileType("SpringGrass") || Main.tile[PlacementX, PlacementY - 2].type == mod.TileType("SpringGrass"))
