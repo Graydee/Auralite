@@ -38,12 +38,12 @@ namespace Auralite.Tiles
 			return mod.GetTexture("Tiles/FlowerTree");
 		}
 
-		public override Texture2D GetTopTextures()
+		public override Texture2D GetTopTextures(int i, int j, ref int frame, ref int frameWidth, ref int frameHeight, ref int xOffsetLeft, ref int yOffset)
 		{
 			return mod.GetTexture("Tiles/FlowerTree_Tops");
 		}
 
-		public override Texture2D GetBranchTextures()
+		public override Texture2D GetBranchTextures(int i, int j, int trunkOffset, ref int frame)
 		{
 			return mod.GetTexture("Tiles/FlowerTree_Branches");
 		}

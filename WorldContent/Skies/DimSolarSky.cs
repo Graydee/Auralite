@@ -44,7 +44,7 @@ namespace Auralite.WorldContent.Skies
 			this._meteorTexture = ModLoader.GetTexture("Terraria/Misc/SolarSky/Meteor");
 		}
 
-		public override void Update()
+		public override void Update(GameTime gametime)
 		{
 			if (this._isActive)
 			{

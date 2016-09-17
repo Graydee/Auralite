@@ -45,7 +45,7 @@ namespace Auralite.WorldContent.Skies
 			}
 		}
 
-		public override void Update()
+		public override void Update(GameTime gametime)
 		{
 			if (this._isActive)
 			{

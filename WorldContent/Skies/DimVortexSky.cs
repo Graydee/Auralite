@@ -47,7 +47,7 @@ namespace Auralite.WorldContent.Skies
 			this._flashTexture = ModLoader.GetTexture("Terraria/Misc/VortexSky/Flash");
 		}
 
-		public override void Update()
+		public override void Update(GameTime gametime)
 		{
 			if (this._isActive)
 			{
