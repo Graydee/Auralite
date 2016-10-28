@@ -13,9 +13,14 @@ namespace Auralite.Tiles
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
 			AddMapEntry(new Color(162, 222, 184));
-		}
-
-		public override void NumDust(int i, int j, bool fail, ref int num)
+            SetModTree(new TwilightTree());
+        }
+        public override int SaplingGrowthType(ref int style)
+        {
+            style = 0;
+            return mod.TileType("TwilightSapling");
+        }
+        public override void NumDust(int i, int j, bool fail, ref int num)
 		{
 			num = fail ? 1 : 3;
 		}

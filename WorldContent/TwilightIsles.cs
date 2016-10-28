@@ -49,9 +49,15 @@ namespace Auralite.WorldContent
 				DimLib.TileRunner(xAxis, yAxis, (double)WorldGen.genRand.Next(30,30), 1, mod.TileType("TwilightGrass"), true, 0f, 0f, true, true);
 				if (Main.rand.Next(30) == 0)
 				{
-					DimLib.TileRunner(xAxis, yAxis - 5, (double)WorldGen.genRand.Next(30,30), 1, mod.TileType("TwilightGrass"), true, 0f, 0f, true, true);
-				}
-			}
+                            WorldMethods.RoundHill(xAxis, yAxis, 26, 12, 16, true, (ushort)mod.TileType("TwilightGrass"));
+
+                }
+                        if (Main.rand.Next(55) == 0)
+                        {
+                            WorldMethods.RoundHill(xAxis, yAxis - 7, 22, 14, 15, true, (ushort)mod.TileType("TwilightGrass"));
+
+                        }
+                    }
 			// biome gen itself
 
 		}

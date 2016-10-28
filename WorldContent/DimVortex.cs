@@ -27,7 +27,6 @@ namespace Auralite.WorldContent
             };
 
             //activate all tiles
-            DimLib.DoXInRect(rect, activate);
 
             //place pillars of nebula stone
             //pillars spawn no closer than 100 tiles from edges of world
@@ -35,18 +34,43 @@ namespace Auralite.WorldContent
                 //1 in 40 chance of pillar per tile
                     //pillar starting height is 20% to 30% of world height
                     int Height = 15;
-                    //pillar goes to bottom of the world
-                    for(int Y = Height; Y < rect.Height; Y++) {
-						if(Main.rand.Next(400) == 0) 
-						{
-                        DimLib.TileRunner(X, Y, Main.rand.Next(10,16), 1, mod.TileType("VortexRock"), false, 0f, 0f, true); 
+                //pillar goes to bottom of the world
+                for (int Y = Height; Y < rect.Height; Y++) {
+                    if (Main.rand.Next(20000) == 0 && Y > Height + 50 && Y < rect.Height - 70 && X > rect.X + 100 && X < rect.Right - 100)
+                    {
+                        for (int xAxis = X; xAxis < X + 100; xAxis++)
+                        {
+                            int Slope2 = Math.Abs(Main.rand.Next(45, 55) - Math.Abs((xAxis - X) - Main.rand.Next(45, 55))) / 2;
+                            string SlopeText = Slope2.ToString();
+                            //Main.NewText(SlopeText, Color.Orange.R, Color.Orange.G, Color.Orange.B);
+                            for (int I = 0; I < Slope2; I++)
+                            {
+                                DimLib.TileRunner(xAxis, Y + I, (double)WorldGen.genRand.Next(12, 12), 1, mod.TileType("VortexIslandRock"), true, 0f, 0f, true, true);
+                            }
+                            DimLib.TileRunner(xAxis, Y, (double)WorldGen.genRand.Next(12, 12), 1, mod.TileType("VortexIslandRock"), true, 0f, 0f, true, true);
+                            if (Main.rand.Next(13) == 0)
+                            {
+                                WorldMethods.RoundHill(xAxis, Y, 11, 5, 8, true, (ushort)mod.TileType("VortexIslandRock"));
+
+                            }
+                            if (Main.rand.Next(20) == 0)
+                            {
+                                WorldMethods.RoundHill(xAxis, Y - 3, 9, 6, 6, true, (ushort)mod.TileType("VortexIslandRock"));
+
+                            }
+                        }
+                    }
+                    if (Main.rand.Next(400) == 0)
+                    {
+                        DimLib.TileRunner(X, Y, Main.rand.Next(10, 16), 1, mod.TileType("VortexRock"), true, 0f, 0f, false, false);
                     }
                 }
             }
 
+
+
+
             //remove all the dirt
-            DimLib.DestroyDirt(rect, deactivateDirt);
-			Main.tile[rect.Width / 2 + rect.X, rect.Height / 2].active(true);
 			}
 	}
 }
