@@ -18,13 +18,13 @@ namespace Auralite.NPCs
 			}
 			if (player.GetModPlayer<AuralitePlayer>(mod).ZoneVortex)
 			{
-				spawnRate = (int)(spawnRate * 0.18f);
-				maxSpawns = (int)(maxSpawns * 2.5f);
+				spawnRate = (int)(spawnRate * 0.26f);
+				maxSpawns = (int)(maxSpawns * 2.15f);
 			}
             if (player.GetModPlayer<AuralitePlayer>(mod).ZoneStardust)
             {
-                spawnRate = (int)(spawnRate * 0.18f);
-                maxSpawns = (int)(maxSpawns * 2.5f);
+                spawnRate = (int)(spawnRate * 0.26f);
+                maxSpawns = (int)(maxSpawns * 1.75f);
             }
         }
     }
