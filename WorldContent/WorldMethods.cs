@@ -12,7 +12,23 @@ namespace Auralite.WorldContent
 {
 	public class WorldMethods
 	{
-		public static void RoundHole(int X, int Y, int Xmult, int Ymult, int strength, bool initialdig)
+        public static void TempleBasee(int X, int Y, int length, int height, ushort type2, float slope, bool replace, ushort replacetile)
+        {
+            float trueslope = 1 / slope;
+            int Xstray = length / 2;
+            for (int level = 0; level <= height; level++)
+            {
+                for (int I = X - (int)(length + (level * trueslope)); I < X + (int)(length + (level * trueslope)); I++)
+                {
+                    if (Main.tile[(int)I, (int)(Y + level)].type != replacetile || replace)
+                    {
+                        Main.tile[(int)I, (int)(Y + level)].active(true);
+                        Main.tile[(int)I, (int)(Y + level)].type = type2;
+                    }
+                }
+            }
+        }
+        public static void RoundHole(int X, int Y, int Xmult, int Ymult, int strength, bool initialdig)
 		{
 			if (initialdig)
 			{
