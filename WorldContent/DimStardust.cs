@@ -41,7 +41,7 @@ namespace Auralite.WorldContent
 				//pillar goes to bottom of the world
 				for (int Y = Height; Y < rect.Height; Y++)
 				{
-					if (Main.rand.Next(15) == 0)
+					if (Main.rand.Next(45) == 0)
 					{
 						DimLib.TileRunner(X, Y, Main.rand.Next(1, 4), 1, mod.TileType("ShinyStardustRock"), false, 0f, 0f, true);
 					}

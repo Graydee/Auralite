@@ -28,24 +28,34 @@ namespace Auralite.WorldContent
 
             //activate all tiles
             DimLib.DoXInRect(rect, activate);
-
             //place pillars of nebula stone
             //pillars spawn no closer than 100 tiles from edges of world
-            for(int X = rect.X + 25; X < rect.Right - 25; X++) {
+            for (int X = rect.X + 25; X < rect.Right - 25; X++) {
                 //1 in 40 chance of pillar per tile
                 if(Main.rand.Next(20) == 0) {
                     //pillar starting height is 20% to 30% of world height
-                    int Height = Main.rand.Next((int)(Main.maxTilesY*.14), (int)(Main.maxTilesY*.34));
+                    int Height = Main.rand.Next((int)(Main.maxTilesY*.24), (int)(Main.maxTilesY*.44));
                     //pillar goes to bottom of the world
                     for(int Y = Height; Y < rect.Height; Y++) {
                         DimLib.TileRunner(X, Y, Main.rand.Next(10,16), 1, mod.TileType("NebulaRock"), false, 0f, 0f, true); 
                     }
                 }
             }
-			
+            for (int EX = rect.X + 25; EX < rect.Right - 25; EX++)
+            {
+                for (int Why = 25; Why < Main.maxTilesY * .2; Why++)
+                {
+                    if (Main.rand.Next(5000) == 0)
+                    {
+                        int size = Main.rand.Next(3, 25);
+                        WorldMethods.RoundHill(EX, Why, size, size, (int)(size * 1.5), true, (ushort)mod.TileType("StarfireBlock"));
+                    }
+                }
+                
+            }
 
-            //remove all the dirt
-            DimLib.DestroyDirt(rect, deactivateDirt);
+                //remove all the dirt
+                DimLib.DestroyDirt(rect, deactivateDirt);
         }
 	}
 	}
