@@ -37,6 +37,11 @@ namespace Auralite.NPCs.StardustDragon
         {
             return Main.player[(int)Player.FindClosest(npc.position, npc.width, npc.height)].GetModPlayer<AuralitePlayer>(mod).ZoneStardust ? 2000f : 0f;
         }
+        public override void NPCLoot()
+        {
+            if (Main.rand.Next(3) == 1)
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("StardustEssence"));
+        }
         public override bool PreAI()
         {
             if (npc.life <= 1)

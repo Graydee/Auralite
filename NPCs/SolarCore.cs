@@ -30,8 +30,12 @@ namespace Auralite.NPCs
         {
             return Main.player[(int)Player.FindClosest(npc.position, npc.width, npc.height)].GetModPlayer<AuralitePlayer>(mod).ZoneSolar ? 35000f : 0f;
         }
-		
-		  public override bool PreAI()
+        public override void NPCLoot()
+        {
+            if (Main.rand.Next(3) == 1)
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("SolarEssence"));
+        }
+        public override bool PreAI()
         {
             npc.noGravity = true;
             npc.noTileCollide = true;
@@ -72,7 +76,7 @@ namespace Auralite.NPCs
             }
             if (npc.ai[0] == 1f)
             {
-                int dust = Dust.NewDust(npc.position + npc.velocity, npc.width, npc.height, 5, npc.velocity.X * 0.5f, npc.velocity.Y * 0.5f);
+                int dust = Dust.NewDust(npc.position + npc.velocity, npc.width, npc.height, 259, npc.velocity.X * 0.5f, npc.velocity.Y * 0.5f);
                 npc.velocity *= 0.99f;
                 npc.ai[1] += 1f;
                 Counter++;

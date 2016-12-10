@@ -31,7 +31,12 @@ namespace Auralite.NPCs
 		{
 			return Main.player[(int)Player.FindClosest(npc.position, npc.width, npc.height)].GetModPlayer<AuralitePlayer>(mod).ZoneVortex ? 45000f : 0f;
 		}
-		public override void AI()
+        public override void NPCLoot()
+        {
+            if (Main.rand.Next(3) == 1)
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("VortexEssence"));
+        }
+        public override void AI()
 		{
 			npc.ai[0]++;
             if (npc.ai[0] % 3 == 0)

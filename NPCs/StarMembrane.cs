@@ -29,8 +29,13 @@ namespace Auralite.NPCs
         {
             return Main.player[(int)Player.FindClosest(npc.position, npc.width, npc.height)].GetModPlayer<AuralitePlayer>(mod).ZoneStardust ? 35000f : 0f;
         }
-		
-		  public override bool PreAI()
+        public override void NPCLoot()
+        {
+            if (Main.rand.Next(3) == 1)
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("StardustEssence"));
+        }
+
+        public override bool PreAI()
 		  {
             npc.TargetClosest(true);
             Vector2 direction = Main.player[npc.target].Center - npc.Center;
