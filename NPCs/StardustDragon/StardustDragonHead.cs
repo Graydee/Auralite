@@ -35,546 +35,175 @@ namespace Auralite.NPCs.StardustDragon
         }
         public override float CanSpawn(NPCSpawnInfo spawnInfo)
         {
-            return Main.player[(int)Player.FindClosest(npc.position, npc.width, npc.height)].GetModPlayer<AuralitePlayer>(mod).ZoneStardust ? 2000f : 0f;
+            return Main.player[(int)Player.FindClosest(npc.position, npc.width, npc.height)].GetModPlayer<AuralitePlayer>(mod).ZoneStardust ? 8000f : 0f;
+        }
+
+        public override bool PreAI()
+        {
+            if (Main.netMode != 1)
+            {
+                if (npc.ai[0] == 0)
+                {
+                    npc.realLife = npc.whoAmI;
+                    int latestNPC = npc.whoAmI;
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("StardustDragonBodyOne"), npc.whoAmI, 0, latestNPC);
+                    Main.npc[(int)latestNPC].realLife = npc.whoAmI;
+                    Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+                    //
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("StardustDragonBodyThree"), npc.whoAmI, 0, latestNPC);
+                    Main.npc[(int)latestNPC].realLife = npc.whoAmI;
+                    Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+                    //
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("StardustDragonBodyTwo"), npc.whoAmI, 0, latestNPC);
+                    Main.npc[(int)latestNPC].realLife = npc.whoAmI;
+                    Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+                    //
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("StardustDragonBodyOne"), npc.whoAmI, 0, latestNPC);
+                    Main.npc[(int)latestNPC].realLife = npc.whoAmI;
+                    Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+                    //
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("StardustDragonBodyOne"), npc.whoAmI, 0, latestNPC);
+                    Main.npc[(int)latestNPC].realLife = npc.whoAmI;
+                    Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+                    //                    
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("StardustDragonBodyEnd"), npc.whoAmI, 0, latestNPC);
+                    Main.npc[(int)latestNPC].realLife = npc.whoAmI;
+                    Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("StardustDragonTail"), npc.whoAmI, 0, latestNPC);
+                    Main.npc[(int)latestNPC].realLife = npc.whoAmI;
+                    Main.npc[(int)latestNPC].ai[3] = npc.whoAmI;
+
+                    npc.ai[0] = 1;
+                    npc.netUpdate = true;
+                }
+            }
+
+            int minTilePosX = (int)(npc.position.X / 16.0) - 1;
+            int maxTilePosX = (int)((npc.position.X + npc.width) / 16.0) + 2;
+            int minTilePosY = (int)(npc.position.Y / 16.0) - 1;
+            int maxTilePosY = (int)((npc.position.Y + npc.height) / 16.0) + 2;
+            if (minTilePosX < 0)
+                minTilePosX = 0;
+            if (maxTilePosX > Main.maxTilesX)
+                maxTilePosX = Main.maxTilesX;
+            if (minTilePosY < 0)
+                minTilePosY = 0;
+            if (maxTilePosY > Main.maxTilesY)
+                maxTilePosY = Main.maxTilesY;
+
+            bool collision = true;
+
+            for (int i = minTilePosX; i < maxTilePosX; ++i)
+            {
+                for (int j = minTilePosY; j < maxTilePosY; ++j)
+                {
+                    if (Main.tile[i, j] != null && (Main.tile[i, j].nactive() && (Main.tileSolid[(int)Main.tile[i, j].type] || Main.tileSolidTop[(int)Main.tile[i, j].type] && (int)Main.tile[i, j].frameY == 0) || (int)Main.tile[i, j].liquid > 64))
+                    {
+                        Vector2 vector2;
+                        vector2.X = (float)(i * 16);
+                        vector2.Y = (float)(j * 16);
+                        if (npc.position.X + npc.width > vector2.X && npc.position.X < vector2.X + 16.0 && (npc.position.Y + npc.height > (double)vector2.Y && npc.position.Y < vector2.Y + 16.0))
+                        {
+                            collision = true;
+                            if (Main.rand.Next(100) == 0 && Main.tile[i, j].nactive())
+                                WorldGen.KillTile(i, j, true, true, false);
+                        }
+                    }
+                }
+            }
+            float speed = 8f;
+            float acceleration = 0.07f;
+
+            Vector2 npcCenter = new Vector2(npc.position.X + npc.width * 0.5f, npc.position.Y + npc.height * 0.5f);
+            float targetXPos = Main.player[npc.target].position.X + (Main.player[npc.target].width / 2);
+            float targetYPos = Main.player[npc.target].position.Y + (Main.player[npc.target].height / 2);
+
+            float targetRoundedPosX = (float)((int)(targetXPos / 16.0) * 16);
+            float targetRoundedPosY = (float)((int)(targetYPos / 16.0) * 16);
+            npcCenter.X = (float)((int)(npcCenter.X / 16.0) * 16);
+            npcCenter.Y = (float)((int)(npcCenter.Y / 16.0) * 16);
+            float dirX = targetRoundedPosX - npcCenter.X;
+            float dirY = targetRoundedPosY - npcCenter.Y;
+            npc.TargetClosest(true);
+            float length = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
+
+            float absDirX = Math.Abs(dirX);
+            float absDirY = Math.Abs(dirY);
+            float newSpeed = speed / length;
+            dirX = dirX * (newSpeed * 2);
+            dirY = dirY * (newSpeed * 2);
+            if (npc.velocity.X > 0.0 && dirX > 0.0 || npc.velocity.X < 0.0 && dirX < 0.0 || (npc.velocity.Y > 0.0 && dirY > 0.0 || npc.velocity.Y < 0.0 && dirY < 0.0))
+            {
+                if (npc.velocity.X < dirX)
+                    npc.velocity.X = npc.velocity.X + acceleration;
+                else if (npc.velocity.X > dirX)
+                    npc.velocity.X = npc.velocity.X - acceleration;
+                if (npc.velocity.Y < dirY)
+                    npc.velocity.Y = npc.velocity.Y + acceleration;
+                else if (npc.velocity.Y > dirY)
+                    npc.velocity.Y = npc.velocity.Y - acceleration;
+                if (Math.Abs(dirY) < speed * 0.2 && (npc.velocity.X > 0.0 && dirX < 0.0 || npc.velocity.X < 0.0 && dirX > 0.0))
+                {
+                    if (npc.velocity.Y > 0.0)
+                        npc.velocity.Y = npc.velocity.Y + acceleration * 2f;
+                    else
+                        npc.velocity.Y = npc.velocity.Y - acceleration * 2f;
+                }
+                if (Math.Abs(dirX) < speed * 0.2 && (npc.velocity.Y > 0.0 && dirY < 0.0 || npc.velocity.Y < 0.0 && dirY > 0.0))
+                {
+                    if (npc.velocity.X > 0.0)
+                        npc.velocity.X = npc.velocity.X + acceleration * 2f;
+                    else
+                        npc.velocity.X = npc.velocity.X - acceleration * 2f;
+                }
+            }
+            else if (absDirX > absDirY)
+            {
+                if (npc.velocity.X < dirX)
+                    npc.velocity.X = npc.velocity.X + acceleration * 1.1f;
+                else if (npc.velocity.X > dirX)
+                    npc.velocity.X = npc.velocity.X - acceleration * 1.1f;
+                if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < speed * 0.5)
+                {
+                    if (npc.velocity.Y > 0.0)
+                        npc.velocity.Y = npc.velocity.Y + acceleration;
+                    else
+                        npc.velocity.Y = npc.velocity.Y - acceleration;
+                }
+            }
+            else
+            {
+                if (npc.velocity.Y < dirY)
+                    npc.velocity.Y = npc.velocity.Y + acceleration * 1.1f;
+                else if (npc.velocity.Y > dirY)
+                    npc.velocity.Y = npc.velocity.Y - acceleration * 1.1f;
+                if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < speed * 0.5)
+                {
+                    if (npc.velocity.X > 0.0)
+                        npc.velocity.X = npc.velocity.X + acceleration;
+                    else
+                        npc.velocity.X = npc.velocity.X - acceleration;
+                }
+            }
+            
+            npc.rotation = (float)Math.Atan2(npc.velocity.Y, npc.velocity.X) + 1.57f;
+
+            if (collision)
+            {
+                if (npc.localAI[0] != 1)
+                    npc.netUpdate = true;
+                npc.localAI[0] = 1f;
+            }
+            if ((npc.velocity.X > 0.0 && npc.oldVelocity.X < 0.0 || npc.velocity.X < 0.0 && npc.oldVelocity.X > 0.0 || (npc.velocity.Y > 0.0 && npc.oldVelocity.Y < 0.0 || npc.velocity.Y < 0.0 && npc.oldVelocity.Y > 0.0)) && !npc.justHit)
+                npc.netUpdate = true;
+
+            return false;
         }
         public override void NPCLoot()
         {
             if (Main.rand.Next(3) == 1)
                 Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("StardustEssence"));
-        }
-        public override bool PreAI()
-        {
-            if (npc.life <= 1)
-            {
-                npc.life = 0;
-                npc.checkDead();
-            }
-            npc.checkDead();
-            bool flag34 = false;
-            float num316 = 0.2f;
-            int num75 = npc.type;
-            if (num75 <= 95)
-            {
-                if (num75 != 10 && num75 != 39 && num75 != 95)
-                {
-                    goto IL_14788;
-                }
-            }
-            else if (num75 != 117 && num75 != 510)
-            {
-                goto IL_14788;
-            }
-            flag34 = true;
-        IL_14788:
-                
-                if (npc.ai[3] > 0f)
-            {
-                npc.realLife = (int)npc.ai[3];
-            }
-            if (npc.target < 0 || npc.target == 255 || Main.player[npc.target].dead || flag34)
-            {
-                npc.TargetClosest(true);
-            }
-            if (Main.player[npc.target].dead || flag34)
-            {
-                if (npc.timeLeft > 300)
-                {
-                    npc.timeLeft = 300;
-                }
-                if (flag34)
-                {
-                    npc.velocity.Y = npc.velocity.Y + num316;
-                }
-            }
-            if (Main.netMode != 1)
-            {
-                if (npc.ai[0] == 0f)
-                {
-                    npc.ai[3] = (float)npc.whoAmI;
-                    npc.realLife = npc.whoAmI;
-                    int num317 = npc.whoAmI;
-                    for (int num318 = 0; num318 < 14; num318++)
-                    {
-                        int num319 = mod.NPCType("StardustDragonBodyOne");
-                        if (num318 == 1 || num318 == 8)
-                        {
-                            num319 = mod.NPCType("StardustDragonBodyThree");
-                        }
-                        else if (num318 == 11)
-                        {
-                            num319 = mod.NPCType("StardustDragonBodyTwo"); 
-                        }
-                        else if (num318 == 12)
-                        {
-                            num319 = mod.NPCType("StardustDragonBodyEnd");
-                        }
-                        else if (num318 == 13)
-                        {
-                            num319 = mod.NPCType("StardustDragonTail");
-                        }
-                        int num320 = NPC.NewNPC((int)(npc.position.X + (float)(npc.width / 2)), (int)(npc.position.Y + (float)npc.height), num319, npc.whoAmI, 0f, 0f, 0f, 0f, 255);
-                        Main.npc[num320].ai[3] = (float)npc.whoAmI;
-                        Main.npc[num320].realLife = npc.whoAmI;
-                        Main.npc[num320].ai[1] = (float)num317;
-                        Main.npc[num317].ai[0] = (float)num320;
-                        NetMessage.SendData(23, -1, -1, "", num320, 0f, 0f, 0f, 0, 0, 0);
-                        num317 = num320;
-                    }
-                }
-
-
-
-                num75 = mod.NPCType("StardustDragonHead");
-
-                switch (num75)
-                {
-                    case 8:
-                    case 9:
-                    case 11:
-                    case 12:
-                        break;
-                    case 10:
-                        goto IL_155CD;
-                    default:
-                        switch (num75)
-                        {
-                            case 40:
-                            case 41:
-                                break;
-                            default:
-                                switch (num75)
-                                {
-                                    case 88:
-                                    case 89:
-                                    case 90:
-                                    case 91:
-                                    case 92:
-                                    case 96:
-                                    case 97:
-                                    case 99:
-                                    case 100:
-                                        break;
-                                    case 93:
-                                    case 94:
-                                    case 95:
-                                    case 98:
-                                        goto IL_155CD;
-                                    default:
-                                        goto IL_155CD;
-                                }
-                                break;
-                        }
-                        break;
-                }
-
-
-                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[1]].aiStyle != npc.aiStyle)
-                {
-                    npc.life = 0;
-                    npc.HitEffect(0, 10.0);
-                    npc.active = false;
-                    NetMessage.SendData(28, -1, -1, "", npc.whoAmI, -1f, 0f, 0f, 0, 0, 0);
-                }
-            IL_155CD:
-                num75 = npc.type;
-                if (num75 <= 99)
-                {
-                    switch (num75)
-                    {
-                        case 7:
-                        case 8:
-                        case 10:
-                        case 11:
-                            break;
-                        case 9:
-                            goto IL_15750;
-                        default:
-                            switch (num75)
-                            {
-                                case 39:
-                                case 40:
-                                    break;
-                                default:
-                                    switch (num75)
-                                    {
-                                        case 87:
-                                        case 88:
-                                        case 89:
-                                        case 90:
-                                        case 91:
-                                        case 95:
-                                        case 96:
-                                        case 98:
-                                        case 99:
-                                            break;
-                                        case 92:
-                                        case 93:
-                                        case 94:
-                                        case 97:
-                                            goto IL_15750;
-                                        default:
-                                            goto IL_15750;
-                                    }
-                                    break;
-                            }
-                            break;
-                    }
-                }
-                else if (num75 <= 413)
-                {
-                    switch (num75)
-                    {
-                        case 117:
-                        case 118:
-                            break;
-                        default:
-                            switch (num75)
-                            {
-                                case 412:
-                                case 413:
-                                    break;
-                                default:
-                                    goto IL_15750;
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (num75)
-                    {
-                        case 454:
-                        case 455:
-                        case 456:
-                        case 457:
-                        case 458:
-                            break;
-                        default:
-                            switch (num75)
-                            {
-                                case 510:
-                                case 511:
-                                case 513:
-                                case 514:
-                                    break;
-                                case 512:
-                                    goto IL_15750;
-                                default:
-                                    goto IL_15750;
-                            }
-                            break;
-                    }
-                }
-                if (!Main.npc[(int)npc.ai[0]].active || Main.npc[(int)npc.ai[0]].aiStyle != npc.aiStyle)
-                {
-                    npc.life = 0;
-                    npc.HitEffect(0, 10.0);
-                    npc.active = false;
-                    NetMessage.SendData(28, -1, -1, "", npc.whoAmI, -1f, 0f, 0f, 0, 0, 0);
-                }
-            IL_15750:
-
-                if (!npc.active && Main.netMode == 2)
-                {
-                    NetMessage.SendData(28, -1, -1, "", npc.whoAmI, -1f, 0f, 0f, 0, 0, 0);
-                }
-            }
-            int num344 = (int)(npc.position.X / 16f) - 1;
-            int num345 = (int)((npc.position.X + (float)npc.width) / 16f) + 2;
-            int num346 = (int)(npc.position.Y / 16f) - 1;
-            int num347 = (int)((npc.position.Y + (float)npc.height) / 16f) + 2;
-            if (num344 < 0)
-            {
-                num344 = 0;
-            }
-            if (num345 > Main.maxTilesX)
-            {
-                num345 = Main.maxTilesX;
-            }
-            if (num346 < 0)
-            {
-                num346 = 0;
-            }
-            if (num347 > Main.maxTilesY)
-            {
-                num347 = Main.maxTilesY;
-            }
-            bool flag35 = true;
-
-
-
-            if (npc.velocity.X < 0f)
-            {
-                npc.spriteDirection = 1;
-            }
-            else if (npc.velocity.X > 0f)
-            {
-                npc.spriteDirection = -1;
-            }
-
-
-                float num352 = 11f;
-               float num353 = 0.25f;
-
-            Vector2 vector40 = new Vector2(npc.position.X + (float)npc.width * 0.5f, npc.position.Y + (float)npc.height * 0.5f);
-            float num355 = Main.player[npc.target].position.X + (float)(Main.player[npc.target].width / 2);
-            float num356 = Main.player[npc.target].position.Y + (float)(Main.player[npc.target].height / 2);
-
-            num355 = (float)((int)(num355 / 16f) * 16);
-            num356 = (float)((int)(num356 / 16f) * 16);
-            vector40.X = (float)((int)(vector40.X / 16f) * 16);
-            vector40.Y = (float)((int)(vector40.Y / 16f) * 16);
-            num355 -= vector40.X;
-            num356 -= vector40.Y;
-
-            float num368 = (float)Math.Sqrt((double)(num355 * num355 + num356 * num356));
-            if (npc.ai[1] > 0f && npc.ai[1] < (float)Main.npc.Length)
-            {
-                try
-                {
-                    vector40 = new Vector2(npc.position.X + (float)npc.width * 0.5f, npc.position.Y + (float)npc.height * 0.5f);
-                    num355 = Main.npc[(int)npc.ai[1]].position.X + (float)(Main.npc[(int)npc.ai[1]].width / 2) - vector40.X;
-                    num356 = Main.npc[(int)npc.ai[1]].position.Y + (float)(Main.npc[(int)npc.ai[1]].height / 2) - vector40.Y;
-                }
-                catch
-                {
-                }
-                npc.rotation = (float)Math.Atan2((double)num356, (double)num355) + 1.57f;
-                num368 = (float)Math.Sqrt((double)(num355 * num355 + num356 * num356));
-                int num369 = npc.width;
-                num369 = 42;
-
-                num368 = (num368 - (float)num369) / num368;
-                num355 *= num368;
-                num356 *= num368;
-                npc.velocity = Vector2.Zero;
-                npc.position.X = npc.position.X + num355;
-                npc.position.Y = npc.position.Y + num356;
-                if (num355 < 0f)
-                {
-                    npc.spriteDirection = 1;
-                }
-                else if (num355 > 0f)
-                {
-                    npc.spriteDirection = -1;
-                }
-
-            }
-            else
-            {
-                if (!flag35)
-                {
-                    npc.TargetClosest(true);
-                    npc.velocity.Y = npc.velocity.Y + 0.11f;
-                    if (npc.velocity.Y > num352)
-                    {
-                        npc.velocity.Y = num352;
-                    }
-                    if ((double)(Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y)) < (double)num352 * 0.4)
-                    {
-                        if (npc.velocity.X < 0f)
-                        {
-                            npc.velocity.X = npc.velocity.X - num353 * 1.1f;
-                        }
-                        else
-                        {
-                            npc.velocity.X = npc.velocity.X + num353 * 1.1f;
-                        }
-                    }
-                    else if (npc.velocity.Y == num352)
-                    {
-                        if (npc.velocity.X < num355)
-                        {
-                            npc.velocity.X = npc.velocity.X + num353;
-                        }
-                        else if (npc.velocity.X > num355)
-                        {
-                            npc.velocity.X = npc.velocity.X - num353;
-                        }
-                    }
-                    else if (npc.velocity.Y > 4f)
-                    {
-                        if (npc.velocity.X < 0f)
-                        {
-                            npc.velocity.X = npc.velocity.X + num353 * 0.9f;
-                        }
-                        else
-                        {
-                            npc.velocity.X = npc.velocity.X - num353 * 0.9f;
-                        }
-                    }
-                }
-                else
-                {
-                        float num370 = num368 / 40f;
-                        if (num370 < 10f)
-                        {
-                            num370 = 10f;
-                        }
-                        if (num370 > 20f)
-                        {
-                            num370 = 20f;
-                        }
-                        npc.soundDelay = (int)num370;
-                        Main.PlaySound(15, (int)npc.position.X, (int)npc.position.Y, 1);
-                    num368 = (float)Math.Sqrt((double)(num355 * num355 + num356 * num356));
-                    float num371 = Math.Abs(num355);
-                    float num372 = Math.Abs(num356);
-                    float num373 = num352 / num368;
-                    num355 *= num373;
-                    num356 *= num373;
-                    bool flag37 = false;
-
-                    if (flag37)
-                    {
-                        bool flag38 = true;
-
-                        if (flag38)
-                        {
-                            if (Main.netMode != 1 && (double)(npc.position.Y / 16f) > (Main.rockLayer + (double)Main.maxTilesY) / 2.0)
-                            {
-                                npc.active = false;
-                                int num375 = (int)npc.ai[0];
-                                while (num375 > 0 && num375 < 200 && Main.npc[num375].active && Main.npc[num375].aiStyle == npc.aiStyle)
-                                {
-                                    int num376 = (int)Main.npc[num375].ai[0];
-                                    Main.npc[num375].active = false;
-                                    npc.life = 0;
-                                    if (Main.netMode == 2)
-                                    {
-                                        NetMessage.SendData(23, -1, -1, "", num375, 0f, 0f, 0f, 0, 0, 0);
-                                    }
-                                    num375 = num376;
-                                }
-                                if (Main.netMode == 2)
-                                {
-                                    NetMessage.SendData(23, -1, -1, "", npc.whoAmI, 0f, 0f, 0f, 0, 0, 0);
-                                }
-                            }
-                            num355 = 0f;
-                            num356 = num352;
-                        }
-                    }
-                    bool flag39 = false;
-                        if (((npc.velocity.X > 0f && num355 < 0f) || (npc.velocity.X < 0f && num355 > 0f) || (npc.velocity.Y > 0f && num356 < 0f) || (npc.velocity.Y < 0f && num356 > 0f)) && Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) > num353 / 2f && num368 < 300f)
-                        {
-                            flag39 = true;
-                            if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < num352)
-                            {
-                                npc.velocity *= 1.1f;
-                            }
-                        }
-                        if (npc.position.Y > Main.player[npc.target].position.Y || Main.player[npc.target].dead)
-                        {
-                            flag39 = true;
-                            if (Math.Abs(npc.velocity.X) < num352 / 2f)
-                            {
-                                if (npc.velocity.X == 0f)
-                                {
-                                    npc.velocity.X = npc.velocity.X - (float)npc.direction;
-                                }
-                                npc.velocity.X = npc.velocity.X * 1.1f;
-                            }
-                            else if (npc.velocity.Y > -num352)
-                            {
-                                npc.velocity.Y = npc.velocity.Y - num353;
-                            }
-                        }
-                    
-
-                    if (!flag39)
-                    {
-                        if ((npc.velocity.X > 0f && num355 > 0f) || (npc.velocity.X < 0f && num355 < 0f) || (npc.velocity.Y > 0f && num356 > 0f) || (npc.velocity.Y < 0f && num356 < 0f))
-                        {
-                            if (npc.velocity.X < num355)
-                            {
-                                npc.velocity.X = npc.velocity.X + num353;
-                            }
-                            else if (npc.velocity.X > num355)
-                            {
-                                npc.velocity.X = npc.velocity.X - num353;
-                            }
-                            if (npc.velocity.Y < num356)
-                            {
-                                npc.velocity.Y = npc.velocity.Y + num353;
-                            }
-                            else if (npc.velocity.Y > num356)
-                            {
-                                npc.velocity.Y = npc.velocity.Y - num353;
-                            }
-                            if ((double)Math.Abs(num356) < (double)num352 * 0.2 && ((npc.velocity.X > 0f && num355 < 0f) || (npc.velocity.X < 0f && num355 > 0f)))
-                            {
-                                if (npc.velocity.Y > 0f)
-                                {
-                                    npc.velocity.Y = npc.velocity.Y + num353 * 2f;
-                                }
-                                else
-                                {
-                                    npc.velocity.Y = npc.velocity.Y - num353 * 2f;
-                                }
-                            }
-                            if ((double)Math.Abs(num355) < (double)num352 * 0.2 && ((npc.velocity.Y > 0f && num356 < 0f) || (npc.velocity.Y < 0f && num356 > 0f)))
-                            {
-                                if (npc.velocity.X > 0f)
-                                {
-                                    npc.velocity.X = npc.velocity.X + num353 * 2f;
-                                }
-                                else
-                                {
-                                    npc.velocity.X = npc.velocity.X - num353 * 2f;
-                                }
-                            }
-                        }
-                        else if (num371 > num372)
-                        {
-                            if (npc.velocity.X < num355)
-                            {
-                                npc.velocity.X = npc.velocity.X + num353 * 1.1f;
-                            }
-                            else if (npc.velocity.X > num355)
-                            {
-                                npc.velocity.X = npc.velocity.X - num353 * 1.1f;
-                            }
-                            if ((double)(Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y)) < (double)num352 * 0.5)
-                            {
-                                if (npc.velocity.Y > 0f)
-                                {
-                                    npc.velocity.Y = npc.velocity.Y + num353;
-                                }
-                                else
-                                {
-                                    npc.velocity.Y = npc.velocity.Y - num353;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (npc.velocity.Y < num356)
-                            {
-                                npc.velocity.Y = npc.velocity.Y + num353 * 1.1f;
-                            }
-                            else if (npc.velocity.Y > num356)
-                            {
-                                npc.velocity.Y = npc.velocity.Y - num353 * 1.1f;
-                            }
-                            if ((double)(Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y)) < (double)num352 * 0.5)
-                            {
-                                if (npc.velocity.X > 0f)
-                                {
-                                    npc.velocity.X = npc.velocity.X + num353;
-                                }
-                                else
-                                {
-                                    npc.velocity.X = npc.velocity.X - num353;
-                                }
-                            }
-                        }
-                    }
-                }
-                npc.rotation = (float)Math.Atan2((double)npc.velocity.Y, (double)npc.velocity.X) + 1.57f;
-
-            }
-            return false;
         }
     }
 }
