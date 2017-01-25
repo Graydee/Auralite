@@ -28,6 +28,7 @@ namespace Auralite.WorldContent
                 }
             }
         }
+        
         public static void RoundHole(int X, int Y, int Xmult, int Ymult, int strength, bool initialdig)
 		{
 			if (initialdig)

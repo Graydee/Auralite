@@ -23,12 +23,12 @@ namespace Auralite
 		public bool ZoneSpring = false;
 		public bool ZoneFlower = false;
 		public bool ZoneFlame = false;
-		public int partySize = 0;
+		//public int partySize = 0;
         public bool auraWatch = false;
 		public bool mysticMirror = false;
         public int freezeTime = 0;
 		
-		public override void ResetEffects()
+	/*	public override void ResetEffects()
 		{
 			partySize = 0;
 
@@ -40,7 +40,7 @@ namespace Auralite
 			}
             auraWatch = false;
 			mysticMirror = false;
-        }
+        }*/
 
         public override void UpdateBiomes()
 		{

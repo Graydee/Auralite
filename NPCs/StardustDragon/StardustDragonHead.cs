@@ -23,8 +23,8 @@ namespace Auralite.NPCs.StardustDragon
             npc.damage = 80;
             npc.defense = 10;
             npc.lifeMax = 30000;
-            npc.soundHit = 7;
-            npc.soundKilled = 8;
+            npc.HitSound = SoundID.NPCHit5;
+            npc.DeathSound = SoundID.NPCDeath6;
             npc.noGravity = true;
             npc.knockBackResist = 0f;
             npc.value = 10000f;

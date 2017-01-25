@@ -23,8 +23,8 @@ namespace Auralite.Items.Weapons.Swung
 			item.knockBack = 6;
             item.value = 80000;
             item.rare = 8;
-            item.useSound = 1;
-			item.shoot = mod.ProjectileType("MysticBolt");
+            item.UseSound = SoundID.Item1;
+            item.shoot = mod.ProjectileType("MysticBolt");
 			item.shootSpeed = 9f;
 			item.autoReuse = false;
 		}
