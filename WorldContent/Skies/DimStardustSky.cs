@@ -134,11 +134,11 @@ namespace Auralite.WorldContent.Skies
 					float num5 = (float)j / (float)num2;
 					this._stars[num3].Position.X = num4 * (float)Main.maxTilesX * 16f;
 					this._stars[num3].Position.Y = num5 * ((float)Main.worldSurface * 16f + 2000f) - 1000f;
-					this._stars[num3].Depth = Main.rand.NextFloat() * 8f + 1.5f;
-					this._stars[num3].TextureIndex = Main.rand.Next(this._starTextures.Length);
-					this._stars[num3].SinOffset = Main.rand.NextFloat() * 6.28f;
-					this._stars[num3].AlphaAmplitude = Main.rand.NextFloat() * 5f;
-					this._stars[num3].AlphaFrequency = Main.rand.NextFloat() + 1f;
+					this._stars[num3].Depth = this._random.NextFloat() * 8f + 1.5f;
+					this._stars[num3].TextureIndex = this._random.Next(this._starTextures.Length);
+					this._stars[num3].SinOffset = this._random.NextFloat() * 6.28f;
+					this._stars[num3].AlphaAmplitude = this._random.NextFloat() * 5f;
+					this._stars[num3].AlphaFrequency = this._random.NextFloat() + 1f;
 					num3++;
 				}
 			}

@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,4 +19,4 @@ namespace Auralite.NPCs
 		//Used to identify that this used to be a town NPC
 		public bool town = false;
     }
-}*/
+}

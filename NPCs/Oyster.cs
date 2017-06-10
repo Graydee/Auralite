@@ -19,8 +19,8 @@ namespace Auralite.NPCs
             npc.noGravity = false;
             npc.noTileCollide = false;
             npc.lifeMax = 20;
-            npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath1;
+            npc.soundHit = 6;
+            npc.soundKilled = 6;
             npc.value = 300f;
             npc.knockBackResist = 0.5f;
             npc.aiStyle = 0;

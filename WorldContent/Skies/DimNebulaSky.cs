@@ -125,9 +125,9 @@ namespace Auralite.WorldContent.Skies
 			this._pillars = new DimNebulaSky.LightPillar[40];
 			for (int i = 0; i < this._pillars.Length; i++)
 			{
-				this._pillars[i].Position.X = (float)i / (float)this._pillars.Length * ((float)Main.maxTilesX * 16f + 20000f) + Main.rand.NextFloat() * 40f - 20f - 20000f;
-				this._pillars[i].Position.Y = Main.rand.NextFloat() * 200f - 2000f;
-				this._pillars[i].Depth = Main.rand.NextFloat() * 8f + 7f;
+				this._pillars[i].Position.X = (float)i / (float)this._pillars.Length * ((float)Main.maxTilesX * 16f + 20000f) + this._random.NextFloat() * 40f - 20f - 20000f;
+				this._pillars[i].Position.Y = this._random.NextFloat() * 200f - 2000f;
+				this._pillars[i].Depth = this._random.NextFloat() * 8f + 7f;
 			}
 			Array.Sort<DimNebulaSky.LightPillar>(this._pillars, new Comparison<DimNebulaSky.LightPillar>(this.SortMethod));
 		}

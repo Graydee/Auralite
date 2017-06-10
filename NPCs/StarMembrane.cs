@@ -17,11 +17,10 @@ namespace Auralite.NPCs
 			npc.defense = 5;
             npc.width = npc.height = 90;
 			npc.lifeMax = 3000;
-            npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath1;
+            npc.soundHit = 5;
             npc.noGravity = true;
             npc.noTileCollide = true;
-  
+            npc.soundKilled = 6;
             npc.value = 200f;
 			npc.knockBackResist = 0f;
 		}

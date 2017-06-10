@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -35,7 +35,7 @@ namespace Auralite.NPCs
 			}
 		}*/
 
-		/*//Do stuff before the AI executes
+		//Do stuff before the AI executes
 		public override bool PreAI(NPC npc)
 		{
 			MercData mercData = (MercData)mod.GetModWorld("MercData");
@@ -83,4 +83,4 @@ namespace Auralite.NPCs
 			}
 		}
     }
-}*/
+}

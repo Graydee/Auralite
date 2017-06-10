@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -194,12 +194,12 @@ namespace Auralite.NPCs
 				}*/
 
 				//Bam. That should do the trick. The old method didn't face the target; now it does!
-			//	int dir = 1 * Math.Sign(Math.Cos(npc.DirectionTo(player.Center).ToRotation()));
-			//	npc.spriteDirection = dir;
-			//	npc.direction = dir;
-//
+				int dir = 1 * Math.Sign(Math.Cos(npc.DirectionTo(player.Center).ToRotation()));
+				npc.spriteDirection = dir;
+				npc.direction = dir;
+
 				//And this should do for the previous if-statement mess.
-			//	npc.velocity.X += 0.2f * Math.Sign(player.Center.X - npc.Center.X);
+				npc.velocity.X += 0.2f * Math.Sign(player.Center.X - npc.Center.X);
 
 				/*
 				if(npc.Center.X <= player.Center.X && npc.velocity.X <= 4 && Main.rand.Next(2) == 1) {
@@ -209,7 +209,7 @@ namespace Auralite.NPCs
 					npc.velocity.X = npc.velocity.X + 0.2f;
 				}*/
 				//Limits the velocity to moveSpeed
-			/*	if(Math.Abs(npc.velocity.X) >= moveSpeed) {
+				if(Math.Abs(npc.velocity.X) >= moveSpeed) {
 					//Note the use of Math.Sign. It removes the requirement for a second if statement for negative case.
 					npc.velocity.X = Math.Sign(npc.velocity.X) * moveSpeed;
 				}
@@ -401,7 +401,7 @@ namespace Auralite.NPCs
 						Projectile.NewProjectile(npc.Center.X + (npc.spriteDirection * 16), npc.Center.Y - 2f, shootVect.X, shootVect.Y, projType, damage, knockBack, Main.myPlayer);
 						npc.ai[0] = 0;
 					}*/
-		/*		} else {
+				} else {
 					FollowPlayer(npc);
 				}
 			});
@@ -516,4 +516,4 @@ namespace Auralite.NPCs
 			});
 		}
     }
-}*/
+}

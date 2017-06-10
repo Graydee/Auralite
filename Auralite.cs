@@ -22,7 +22,7 @@ namespace Auralite
 			}
 		}
 
-	/*	public const int Hire = 0;
+		public const int Hire = 0;
 		public const int Fail = 1;
 		public const int Fire = 2;
 		public const int AltFail = 3;
@@ -43,7 +43,7 @@ namespace Auralite
 		//AI related objects
 		public Dictionary<int, Action<NPC>> attackStyles = new Dictionary<int, Action<NPC>>();
 		public Dictionary<int, Action<NPC>> aiStyle = new Dictionary<int, Action<NPC>>();
-		public MercAI mercAI = new MercAI();*/
+		public MercAI mercAI = new MercAI();
 
 		public Auralite()
 		{
@@ -59,7 +59,7 @@ namespace Auralite
 		public override void Load()
 		{
 			//party system info loading
-		/*	string[] defHireMessages = { "At your service!", "Let's go!" };
+			string[] defHireMessages = { "At your service!", "Let's go!" };
 			string[] defFailMessages = { "What's the big idea?", "I'm already under contract." };
 			string[] defFireMessages = { "Thanks for the cash!", "What an adventure!" };
 			string[] defAltFailMessages = { "Bugger off.", "Sorry, but my current contract includes loyalty." };
@@ -77,7 +77,7 @@ namespace Auralite
 			aiStyle.Add(NPCID.Guide, mercAI.AttackAIGuide);
 			aiStyle.Add(NPCID.DyeTrader, mercAI.AttackAIDyeTrader);
 			aiStyle.Add(NPCID.Dryad, mercAI.AttackAIDryad);
-			aiStyle.Add(NPCID.Nurse, mercAI.AINurse);*/
+			aiStyle.Add(NPCID.Nurse, mercAI.AINurse);
 
 			//custom sky loading
 			Filters.Scene["Auralite:NebulaSky"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(1f, 0f, 0.9f).UseOpacity(0.5f), EffectPriority.High);
@@ -90,15 +90,15 @@ namespace Auralite
 			SkyManager.Instance["Auralite:VortexSky"] = new DimVortexSky();
 		}
 
-	//	public void AddCustomMessages(int npcID, string[] hire, string[] fail, string[] fire, string[] altFail, string[] noShop){
-	//		hireMessages.Add(npcID, hire);
-	//		failMessages.Add(npcID, fail);
-	////		fireMessages.Add(npcID, fire);
-	//		altFailMessages.Add(npcID, altFail);
-	//		noShopMessages.Add(npcID, noShop);
-	//	}
+		public void AddCustomMessages(int npcID, string[] hire, string[] fail, string[] fire, string[] altFail, string[] noShop){
+			hireMessages.Add(npcID, hire);
+			failMessages.Add(npcID, fail);
+			fireMessages.Add(npcID, fire);
+			altFailMessages.Add(npcID, altFail);
+			noShopMessages.Add(npcID, noShop);
+		}
 
-		/*public void DisplayCustomMessage(NPC npc, int mode){
+		public void DisplayCustomMessage(NPC npc, int mode){
 			//modes: 0 = hire, 1 = fail, 2 = fire, 3 = alt fail, 4 = shop refusal
 			//hiring is green, firing is blue, and failed hires are red
 			string[] messages;
@@ -131,7 +131,7 @@ namespace Auralite
 				Main.NewText(npc.displayName + ": " + messages[Main.rand.Next(0, messages.Length)], 255, 0, 0);
 				break;
 			}
-		}*/
+		}
 
 		public override void UpdateMusic(ref int music)
 		{

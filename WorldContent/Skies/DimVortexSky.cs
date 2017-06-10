@@ -59,16 +59,16 @@ namespace Auralite.WorldContent.Skies
 			}
 			if (this._ticksUntilNextBolt <= 0)
 			{
-				this._ticksUntilNextBolt = Main.rand.Next(1, 5);
+				this._ticksUntilNextBolt = this._random.Next(1, 5);
 				int num = 0;
 				while (this._bolts[num].IsAlive && num != this._bolts.Length - 1)
 				{
 					num++;
 				}
 				this._bolts[num].IsAlive = true;
-				this._bolts[num].Position.X = Main.rand.NextFloat() * ((float)Main.maxTilesX * 16f + 4000f) - 2000f;
-				this._bolts[num].Position.Y = Main.rand.NextFloat() * 500f;
-				this._bolts[num].Depth = Main.rand.NextFloat() * 8f + 2f;
+				this._bolts[num].Position.X = this._random.NextFloat() * ((float)Main.maxTilesX * 16f + 4000f) - 2000f;
+				this._bolts[num].Position.Y = this._random.NextFloat() * 500f;
+				this._bolts[num].Depth = this._random.NextFloat() * 8f + 2f;
 				this._bolts[num].Life = 30;
 			}
 			this._ticksUntilNextBolt--;
